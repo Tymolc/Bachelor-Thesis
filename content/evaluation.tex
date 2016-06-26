@@ -2,21 +2,29 @@
 \label{sec:evaluation}
 
 \subsection{Visual Odometry to record Racing Lines}
-\begin{easylst}
-Pro: 
-&Many Datapoints (in theory up to Framerate positions per second)
-&Capable of detecting fairly slight movements
-&No need for external sensors (apart from camera which already exists)
-&works in every environment (especially where there is no or poor GPS signal)
+\begin{itemize}
+\item Pro: 
+  \begin{itemize}
+  \item Many Datapoints (in theory up to Framerate positions per second)
+  \item Capable of detecting fairly slight movements
+  \item No need for external sensors (apart from camera which already exists)
+  \item works in every environment (especially where there is no or poor GPS signal)
+  \end{itemize}
 
-Con:
-&uses fairly expensive operations
-&&in praxis mobile-range computers will only reach up to 10 fps
-&no constant speed (slows down in areas with many feature points (like forests))
-&fairly error prone
-&&rounding errors and inaccurate calculations add up and distort the racing line
-\end{easylist}
+\item Con:
+  \begin{itemize}
+  \item uses fairly expensive operations
+  \item in praxis mobile-range computers will only reach up to 10 fps
+  \item no constant speed (slows down in areas with many feature points (like forests))
+  \item fairly error prone
+  \item rounding errors and inaccurate calculations add up and distort the racing line
+  \end{itemize}
+\end{itemize}
 \subsection{Usefulness of Racing Line Comparison}
+\begin{itemize}
+  \item professional drivers can achieve similar lap times with very different racing lines
+  \item however amateur and intermediate drivers can learn a lot from more skilled drivers
+\end{itemize}
 
 
 \clearpage
