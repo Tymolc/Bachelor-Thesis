@@ -42,8 +42,15 @@ If the driven track is know or the camera is capable of determining a scale (e.g
   \item possibility to determine accurate horizontal position on track
 \end{itemize}
 
+\subsubsection{Recording OBD2 Data}
+\textit{Definition} OBD II (On-board diagnostics 2) is an interface which all cars build after 1996 in the USA or after 2003 in the EU, respectively, have to have built-in. It implements the SAE J1962 standard which provides standardized PIDs that return specific car-based sensor data, like the current speed, current motor revolution (rpm), throttle position and more.
+
 \subsection{Comparing}
 \subsubsection{Visual Comparison of Racing Line with help of sensor data}
+A fairly simple, but effective way to find out where time is lost on the track is the visual comparison of racing lines from different drivers. The idea is to overlay the previously recorded lines over the race track. To actually determine at which point a driver was faster than the other one, we need an obvious optical representation of the speed at any given point on the track and the possibility to receive further information on demand.
+In our system, the speed is represented by coloring in the racing line on a gradient scale reaching from green (standing still) to red (>250 km/h).
+%TODO: Algorithm here
+Besides speed data, different values, like acceleration, brakeing behaviour or lap time, can be displayed in a similar fashion. That way the fastest line for a given corner can be determined and the slower driver can find out, why their line was inferior.
 
 \begin{itemize}
   \item overlay racing lines with different lap times
@@ -52,6 +59,7 @@ If the driven track is know or the camera is capable of determining a scale (e.g
 \end{itemize}
 
 \subsubsection{Mathematical Calculation of ideal line given a certain track}
+Besides comparing two driver-generated racing lines, it is also possible to calculate a fast, almost ideal racing line.
 \begin{itemize}
   \item calculating smooth curves around an edged representation of the track using Bézier curves
   \item naively not an optimized track, but fair approximation
