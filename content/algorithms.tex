@@ -1,5 +1,7 @@
 \section{Algorithm/Concept}
 \label{sec:algorithm}
+As this Bachelor Thesis tackles two problems, the algorithms can be devided into two categories as well.
+The first category consists of racing line recording concepts and the second one of ways to compare these recordings.
 
 \subsection{Recording}
 \subsubsection{Visual Odometry}
@@ -19,18 +21,21 @@ Outlier removal is important, because otherwise the movement of other cars on th
 If the taken path includes loops it is possible to optimize the result by using loop detection. If any features are redetected at a later point in time and the current position is close to the position the features were redetected, the path can be streched in a way that it connects to the earlier path.
 This can reduce errors that accumulated due to small estimation errors in the previous steps.
 
-TODO:
-\begin{itemize}
-  \item track features from one image to another (Lucas-Kanade-Method)
-  \item approximate direction vector based on emerging vectors (RANSAC?)
-  \item optimize result (Loop-Detection, Algorithm)
-\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%TODO:
+%\begin{itemize}
+%  \item track features from one image to another (Lucas-Kanade-Method)
+%  \item approximate direction vector based on emerging vectors (RANSAC?)
+%  \item optimize result (Loop-Detection, Algorithm)
+%\end{itemize}
 
 \subsubsection{Lane Detection}
-//TODO: Algorithms
 Lane Detection uses markings on a road to determine its lateral boundaries in realtion to the recording camera. It is often used in autonomous driving and driving assistance systems, because the position of the car in between lane markings gives a lot of information about the direction the car is traveling. 
 In our case, not only can we determine a traveling direction, but also the position on the lane.
 By tracking the distance to the left and right lane, a deviation to the middle of the lane can be calculated. 
+If the driven track is know or the camera is capable of determining a scale (e.g. by using a stereo camera), the deviation can even be expressed as a metric length, which is helpful for extracting additional information, like speed and acceleration, later on.
+
+%TODO: Algorithms
 \begin{itemize}
   \item possibility to improve recording results on known track
   \item track distance to left and right lane edge
@@ -39,6 +44,7 @@ By tracking the distance to the left and right lane, a deviation to the middle o
 
 \subsection{Comparing}
 \subsubsection{Visual Comparison of Racing Line with help of sensor data}
+
 \begin{itemize}
   \item overlay racing lines with different lap times
   \item highlight relevant locations, like corners, showing detailed information about throttle and brake behaviour and curvature through the corner
