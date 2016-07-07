@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.6.2)  27 JUN 2016 21:00
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.6.2)  7 JUL 2016 18:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -830,28 +830,28 @@ Overfull \vbox (8.0887pt too high) has occurred while \output is active []
 ]
 File: utils/hpi_logo.pdf Graphic file (type pdf)
  <use utils/hpi_logo.pdf>
-Package pdftex.def Info: utils/hpi_logo.pdf used on input line 47.
+Package pdftex.def Info: utils/hpi_logo.pdf used on input line 48.
 (pdftex.def)             Requested size: 77.05867pt x 36.98866pt.
 
 Overfull \vbox (8.0887pt too high) has occurred while \output is active []
 
 
-[4]
-File: utils/hpi_logo.pdf Graphic file (type pdf)
- <use utils/hpi_logo.pdf>
-Package pdftex.def Info: utils/hpi_logo.pdf used on input line 64.
-(pdftex.def)             Requested size: 77.05867pt x 36.98866pt.
-
-Overfull \vbox (8.0887pt too high) has occurred while \output is active []
-
-
-[5] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
+[4] (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
 )
 File: utils/hpi_logo.pdf Graphic file (type pdf)
 
 <use utils/hpi_logo.pdf>
-Package pdftex.def Info: utils/hpi_logo.pdf used on input line 81.
+Package pdftex.def Info: utils/hpi_logo.pdf used on input line 66.
+(pdftex.def)             Requested size: 77.05867pt x 36.98866pt.
+
+Overfull \vbox (8.0887pt too high) has occurred while \output is active []
+
+
+[5]
+File: utils/hpi_logo.pdf Graphic file (type pdf)
+ <use utils/hpi_logo.pdf>
+Package pdftex.def Info: utils/hpi_logo.pdf used on input line 82.
 (pdftex.def)             Requested size: 77.05867pt x 36.98866pt.
 
 Overfull \vbox (8.0887pt too high) has occurred while \output is active []
@@ -861,7 +861,7 @@ Overfull \vbox (8.0887pt too high) has occurred while \output is active []
 File: utils/hpi_logo.pdf Graphic file (type pdf)
 
 <use utils/hpi_logo.pdf>
-Package pdftex.def Info: utils/hpi_logo.pdf used on input line 19.
+Package pdftex.def Info: utils/hpi_logo.pdf used on input line 8.
 (pdftex.def)             Requested size: 77.05867pt x 36.98866pt.
 
 Overfull \vbox (8.0887pt too high) has occurred while \output is active []
@@ -950,7 +950,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 140.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 140.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 140.
 Package rerunfilecheck Info: File `bachelor_thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 3F9E1323CC974133A2E4D0D087360EEE;2043.
+(rerunfilecheck)             Checksum: DA1EA50CD56E65EC2132B04A952086AD;2044.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 140.
  ) 
 Here is how much of TeX's memory you used:
@@ -967,7 +967,7 @@ f-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/p
 alatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr
 8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on bachelor_thesis.pdf (17 pages, 126707 bytes).
+Output written on bachelor_thesis.pdf (17 pages, 127702 bytes).
 PDF statistics:
  309 PDF objects out of 1000 (max. 8388607)
  263 compressed objects within 3 object streams

@@ -16,7 +16,7 @@
 \BOOKMARK [1][-]{section.4}{Implementation}{}% 16
 \BOOKMARK [2][-]{subsection.4.1}{Recording}{section.4}% 17
 \BOOKMARK [3][-]{subsubsection.4.1.1}{Visual Odometry}{subsection.4.1}% 18
-\BOOKMARK [3][-]{subsubsection.4.1.2}{OBD2 Data}{subsection.4.1}% 19
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Sensordata}{subsection.4.1}% 19
 \BOOKMARK [2][-]{subsection.4.2}{Comparison}{section.4}% 20
 \BOOKMARK [3][-]{subsubsection.4.2.1}{Google Maps}{subsection.4.2}% 21
 \BOOKMARK [1][-]{section.5}{Evaluation}{}% 22

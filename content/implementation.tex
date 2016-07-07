@@ -1,9 +1,15 @@
 \section{Implementation}
 \label{sec:implementation}
 
+Most of the image processing steps were implemented using OpenCV, an open-source C++ computer vision library. 
+
 \subsection{Recording}
 \subsubsection{Visual Odometry}
-\subsubsection{OBD2 Data}
+\subsubsection{Sensordata}
+The OBD-II dongle uses a bluetooth connection to communicate with our analysis software. Via this connection we can open a serial port to write and read data from.
+The ELM 327 standard determines the formatting of the request and of the return value.
+The request consists of the required mode and a Parameter ID (PID), which stands for one specific data value. In mode 1 the dongle returns the current values, which is what we need. Other modes, for example, return the values since the last engine failure or information about the car.
+
 
 \subsection{Comparison}
 \subsubsection{Google Maps}
