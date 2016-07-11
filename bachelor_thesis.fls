@@ -265,6 +265,8 @@ INPUT content/introduction.tex
 INPUT content/introduction.tex
 INPUT utils/hpi_logo.pdf
 INPUT ./utils/hpi_logo.pdf
+INPUT utils/hpi_logo.pdf
+INPUT ./utils/hpi_logo.pdf
 INPUT content/relatedWork.tex
 INPUT content/relatedWork.tex
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omsppl.fd
