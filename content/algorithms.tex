@@ -1,5 +1,6 @@
 \section{Algorithm/Concept}
 \label{sec:algorithm}
+\graphicspath{{utils/}}
 As this Bachelor Thesis tackles two problems, the algorithms can be divided into two categories as well.
 The first category consists of racing line recording concepts and the second one of ways to compare these recordings.
 
@@ -60,6 +61,12 @@ Besides speed data, different values, like acceleration, braking behavior or lap
 
 \subsubsection{Mathematical Calculation of ideal line given a certain track}
 Besides comparing two driver-generated racing lines, it is also possible to calculate a fast, almost ideal racing line.
+
+\textit{Bézier Curves}
+Bézier curves are a way to depict an entire race track, i.e. a curved path, with a set of control points, \{P\textsubscript{0}, P\textsubscript{1}, ..., P\textsubscript{n}\}. In this definition, n is the order of the curve. P\textsubscript{0} and P\textsubscript{n} stand for the beginning and the end point of the curve, respectively, while the intermediate points define the curvature of the curve and don't usually lie on it.
+
+\includegraphics[width=\textwidth]{bezier_track}
+
 \begin{itemize}
   \item calculating smooth curves around an edged representation of the track using Bézier curves
   \item naively not an optimized track, but fair approximation
