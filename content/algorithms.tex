@@ -7,10 +7,13 @@ The first category consists of racing line recording concepts and the second one
 \subsection{Recording}
 \subsubsection{Visual Odometry}
 Visual Odometry (VO) is a concept that most camera-based robots use for navigation. It uses two consecutive camera frames to calculate the rotation and translation of the camera between them. The advantage over traditional tracking systems like GPS is, that it isn't dependent on any external sources, like satellites or radio towers, to determine the position of the object.
+
 Also it is capable of much higher polling rates than most GPS receivers, which normally poll at 1 Hz, so they get 1 positional update per second. The potential speed of Visual Odometry is linked to the frame rate of the camera. That way, a camera that records at 30 frames per second enables Visual Odometry to estimate a position 30 times a second. 
 The crude algorithm behind VO determines and stores recognizable features in one frame, using a feature detection algorithm.
 At first we need two consecutive, rectified camera images. It is important that the images are rectified, because otherwise the edges of the image would be curved and produce wrong results.
+
 Our solution uses the Harris corner detection method for determining features. Finding corners in an image is a very important prerequisite for the final position determination, because it allows us to calculate direction vector to another point. This other point being the same feature in the following camera frame, where the Harris detector is used, as well.
+
 Having two sets of corners from either image we can track each feature from one frame to another. 
 \begin{itemize}
     \item Lucas-Kanade?
@@ -18,7 +21,14 @@ Having two sets of corners from either image we can track each feature from one 
 \end{itemize}
 Now that we have an end point to every (possible) starting point, we can construct a set of directional vectors.
 Removing outliers (i.e. vectors that are much longer or go in a vastly different direction than most vectors) an approximation translation and rotation the camera conducted during the two frames can be calculated.
-Outlier removal is important, because otherwise the movement of other cars on the track would cause the algorithm to think the camera was moving in a different direction than it actually was.
+
+Outlier removal is an important stop, because otherwise external movements, like those of other cars on the track, might cause the algorithm to think the camera was moving in a different direction than it actually was.
+To do that we used an iterative method called \textit{Random Sample Consensus} (RANSAC). 
+The RANSAC algorithm works by taking a random subset of all the available data, in our case the vectors obtained by VO, and fitting a linear model with a specified neighborhood which contains this subset. All other vectors are then tested against this model and those who fit the model are considered part of the \textit{consensus set}.
+If enough vectors lie within this model, it is considered as a viable candidate for a linear approximation. Optionally, the model can be re-evaluated using all vectors in the consensus set.
+
+This sequence of events is repeated a fixed amount of times, each time producing a model which is rejected, because it contains too few inliers, or a refined model, if the model consists of more inliers than the best model so far.
+
 If the taken path includes loops it is possible to optimize the result by using loop detection. If any features are re-detected at a later point in time and the current position is close to the position the features were re-detected, the path can be stretched in a way that it connects to the earlier path.
 This can reduce errors that accumulated due to small estimation errors in the previous steps.
 
@@ -26,7 +36,6 @@ This can reduce errors that accumulated due to small estimation errors in the pr
 %TODO:
 %\begin{itemize}
 %  \item track features from one image to another (Lucas-Kanade-Method)
-%  \item approximate direction vector based on emerging vectors (RANSAC?)
 %  \item optimize result (Loop-Detection, Algorithm)
 %\end{itemize}
 
@@ -67,22 +76,25 @@ Bézier curves are a way to depict an entire race track, i.e. a curved path, wit
 
 \includegraphics[width=\textwidth]{bezier_track}
 
+As we want to get the line with the least curvature, the Bézier curve is capable of creating a fair approximation, especially suitable for racing beginners.
 \begin{itemize}
   \item calculating smooth curves around an edged representation of the track using Bézier curves
-  \item naively not an optimized track, but fair approximation
   \item simulating a chain of spring-loaded masses -> ideal line calculated by iterating multiple times and taking the line that uses the least force to keep masses in bounds of track (//this seems quite complex, not really sure how this works yet)
 \end{itemize}
 
 \subsubsection{Mathematical Comparison of two paths}
-\begin{itemize}
-  \item convert pair of consecutive points into list of vectors; each vector is distance between points and angle to x-axis
-  \begin{itemize}
-    \item double dx = endPoint.X - startPoint.X;
-    \item double dy = endPoint.Y - startPoint.Y;
-    \item double magnitude = Math.Sqrt((dx * dx) + (dy * dy));
-    \item double direction = Math.Atan2(dy, dx) * (180 / Math.PI);
-  \end{itemize}
-  \item combine vectors that have the same direction, by generating a new vector with the direction of the old ones and the sum of their lengths. This indicates a straight, which is not that interesting for comparison
-  \item Now we can compare the angle for each section of a corner
-\end{itemize}
+To gain additional and more detailed information about the driven racing line, it is helpful to get mathematical values for specific areas (e.g. the entry and exit angle of curves). This can tell a driver that their line was too shallow or too wide and provide the potential to improve.
+For this technique we can use either racing line detection algorithm, even GPS. Every pair of consecutive points is turned into a vector, consisting of the distance between the points and the angle $\theta$ to the x-axis (the equator in case of GPS).
+\begin{center}
+$\Delta x = endPoint.x - startPoint.x$
+
+$\Delta y = endPoint.y - startPoint.y$
+
+$\overline{xy} = \sqrt{\Delta x² * \Delta y²}$
+
+$\theta = \arctan(\frac{\Delta x}{\Delta y})$ 
+\end{center}
+
+To speed up subsequent calculations all consecutive vectors with the same $\theta$ can be combined into one vector by generating a new vector with the sum of the magnitude of the old ones. This indicates a straight where the individual sections aren't that interesting.
+Now the angle of each section of a corner can be compared. Again, the coloring-approach may be used as a simple way to determine the angle at a glance.
 \clearpage

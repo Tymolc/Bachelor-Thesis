@@ -1,8 +1,15 @@
 \section{Related Work}
 \label{sec:related_work}
 
-\subsection{Racing Line calculation in Video Games}
-\begin{itemize}
-	\item vamos racing simulator
-\end{itemize}
-	\clearpage
+\subsection{Racing Line calculation}
+Contrary to most racing sports, where a racing line is usually drawn by an expert, video games, especially from independent developers, tend to concentrate on calculating the racing line for the computer-controlled cars.
+
+\subsubsection{Vamos Racing Simulator}
+One example is the \textit{Vamos racing simulator}. It uses an iterative curvature-minimization technique, simulating spring-loaded hinges that are placed in the middle of the track. The lateral forces a car produces during cornering are used to simulate the opening or closing of these hinges, iteratively shaping the racing line. After a certain number of iterations the curve stabilizes. This happens when the force across all hinges and therefore the curvature of the racing line is close to minimal. After the calculation is done, the possible speed of the racing cars at every point on the track can be calculated. 
+
+\subsubsection{RaceOptimal}
+RaceOptimal is a website that offers calculated ideal racing lines for 4 different vehicles on a variety of tracks. The approach is, similarly to that of Vamos, iterative. However their focus lies on the physics of the cars. They use a Bézier-curve to approximate a smooth line across a circuit, based on predefined control points. Then the fastest possible speed for every point on the track is calculated, based on the curvature of the turn and the friction coefficient and mass of the car and limited by the cars top speed. After that the acceleration is adjusted to not exceed the power of the engine and capabilities of the tires. Lastly, the graph is adjusted to also include the capacity of the brakes and aerodynamic drag. 
+This algorithm is used on a certain number of possible lines, the initial population. These solution then breed offspring, which are combinations of the initial parents, and are modified randomly, to get as many different racing lines as possible.
+The best children are kept and breed again, bad solutions will be thrown away. This process is repeated until the result, being the lap time on the given track, stays consistent.
+
+\clearpage
