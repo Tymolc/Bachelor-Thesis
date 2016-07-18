@@ -6,6 +6,7 @@ The first category consists of racing line recording concepts and the second one
 
 \subsection{Recording}
 \subsubsection{Visual Odometry}
+\label{subsec:vo}
 Visual Odometry (VO) is a concept that most camera-based robots use for navigation. It uses two consecutive camera frames to calculate the rotation and translation of the camera between them. The advantage over traditional tracking systems like GPS is, that it isn't dependent on any external sources, like satellites or radio towers, to determine the position of the object.
 
 Also it is capable of much higher polling rates than most GPS receivers, which normally poll at 1 Hz, so they get 1 positional update per second. The potential speed of Visual Odometry is linked to the frame rate of the camera. That way, a camera that records at 30 frames per second enables Visual Odometry to estimate a position 30 times a second. 
@@ -77,10 +78,7 @@ Bézier curves are a way to depict an entire race track, i.e. a curved path, wit
 \includegraphics[width=\textwidth]{bezier_track}
 
 As we want to get the line with the least curvature, the Bézier curve is capable of creating a fair approximation, especially suitable for racing beginners.
-\begin{itemize}
-  \item calculating smooth curves around an edged representation of the track using Bézier curves
-  \item simulating a chain of spring-loaded masses -> ideal line calculated by iterating multiple times and taking the line that uses the least force to keep masses in bounds of track (//this seems quite complex, not really sure how this works yet)
-\end{itemize}
+
 
 \subsubsection{Mathematical Comparison of two paths}
 To gain additional and more detailed information about the driven racing line, it is helpful to get mathematical values for specific areas (e.g. the entry and exit angle of curves). This can tell a driver that their line was too shallow or too wide and provide the potential to improve.

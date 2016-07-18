@@ -5,6 +5,22 @@ Most of the image processing steps were implemented using OpenCV, an open-source
 
 \subsection{Recording}
 \subsubsection{Visual Odometry}
+To extract the Visual Odometry data from the video stream, we used a library called libviso2, which was developed at the Karlsruhe Insitute of Technology (KIT). The library needs a left and right hand, rectified image from a stereo camera. The ZED camera from Stereolabs we used already rectifies the images, so we only need to convert the received stereo image into two data buffers.
+For that the left and right image is stored in each one OpenCV Mat, converted into grayscale and then transformed into a uchar buffer.
+Now that the prerequisites are met, we can feed the images to our library.
+After analyzing the input as described in section \ref{subsec:vo}, the output will be a 4x4-matrix, the so called pose.
+\begin{figure}
+\[
+ \begin{matrix}
+  R11 & R21 & R31 & Tx \\
+  R12 & R22 & R32 & Ty \\
+  R13 & R23 & R33 & Tz \\
+  0 & 0 & 0 & 1
+ \end{matrix}
+\]
+\caption{Pose as returned by visual odometry algorithm}
+\end{figure}
+
 \subsubsection{Sensordata}
 The OBD-II dongle uses bluetooth connection to communicate with our analysis software. Via this connection we can open a serial port to write and read data from.
 The ELM 327 standard determines the formatting of the request and of the return value.
