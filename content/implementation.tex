@@ -9,17 +9,20 @@ To extract the Visual Odometry data from the video stream, we used a library cal
 For that the left and right image is stored in each one OpenCV Mat, converted into grayscale and then transformed into a uchar buffer.
 Now that the prerequisites are met, we can feed the images to our library.
 After analyzing the input as described in section \ref{subsec:vo}, the output will be a 4x4-matrix, the so called pose.
-\begin{figure}
-\[
- \begin{matrix}
-  R11 & R21 & R31 & Tx \\
-  R12 & R22 & R32 & Ty \\
-  R13 & R23 & R33 & Tz \\
-  0 & 0 & 0 & 1
- \end{matrix}
-\]
-\caption{Pose as returned by visual odometry algorithm}
-\end{figure}
+
+%\begin{figure}
+ \begin{table}[!ht]
+  \begin{center}
+   \begin{tabular}{c c c c}
+    R11 & R21 & R31 & Tx \\
+    R12 & R22 & R32 & Ty \\
+    R13 & R23 & R33 & Tz \\
+    0 & 0 & 0 & 1	
+   \end{tabular}
+  \end{center}
+  \caption{Pose as returned by visual odometry algorithm}
+ \end{table}
+%\end{figure}
 
 \subsubsection{Sensordata}
 The OBD-II dongle uses bluetooth connection to communicate with our analysis software. Via this connection we can open a serial port to write and read data from.
