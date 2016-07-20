@@ -83,6 +83,8 @@ As we want to get the line with the least curvature, the Bézier curve is capabl
 \subsubsection{Mathematical Comparison of two paths}
 To gain additional and more detailed information about the driven racing line, it is helpful to get mathematical values for specific areas (e.g. the entry and exit angle of curves). This can tell a driver that their line was too shallow or too wide and provide the potential to improve.
 For this technique we can use either racing line detection algorithm, even GPS. Every pair of consecutive points is turned into a vector, consisting of the distance between the points and the angle $\theta$ to the x-axis (the equator in case of GPS).
+
+\begin{minipage}{\textwidth}
 \begin{center}
 $\Delta x = endPoint.x - startPoint.x$
 
@@ -92,6 +94,7 @@ $\overline{xy} = \sqrt{\Delta x² * \Delta y²}$
 
 $\theta = \arctan(\frac{\Delta x}{\Delta y})$ 
 \end{center}
+\end{minipage}
 
 To speed up subsequent calculations all consecutive vectors with the same $\theta$ can be combined into one vector by generating a new vector with the sum of the magnitude of the old ones. This indicates a straight where the individual sections aren't that interesting.
 Now the angle of each section of a corner can be compared. Again, the coloring-approach may be used as a simple way to determine the angle at a glance.

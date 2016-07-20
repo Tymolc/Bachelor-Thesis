@@ -5,30 +5,56 @@ Most of the image processing steps were implemented using OpenCV, an open-source
 
 \subsection{Recording}
 \subsubsection{Visual Odometry}
-To extract the Visual Odometry data from the video stream, we used a library called libviso2, which was developed at the Karlsruhe Insitute of Technology (KIT). The library needs a left and right hand, rectified image from a stereo camera. The ZED camera from Stereolabs we used already rectifies the images, so we only need to convert the received stereo image into two data buffers.
+To extract the Visual Odometry data from the video stream, we used a library called libviso2, which was developed at the Karlsruhe Institute of Technology (KIT). The library needs a left and right hand, rectified image from a stereo camera. The ZED camera from Stereolabs we used already rectifies the images, so we only need to convert the received stereo image into two data buffers.
 For that the left and right image is stored in each one OpenCV Mat, converted into grayscale and then transformed into a uchar buffer.
 Now that the prerequisites are met, we can feed the images to our library.
 After analyzing the input as described in section \ref{subsec:vo}, the output will be a 4x4-matrix, the so called pose.
 
-%\begin{figure}
- \begin{table}[!ht]
-  \begin{center}
-   \begin{tabular}{c c c c}
-    R11 & R21 & R31 & Tx \\
-    R12 & R22 & R32 & Ty \\
-    R13 & R23 & R33 & Tz \\
-    0 & 0 & 0 & 1	
-   \end{tabular}
-  \end{center}
-  \caption{Pose as returned by visual odometry algorithm}
- \end{table}
-%\end{figure}
+\begin{table}[!ht]
+ \begin{center}
+  \begin{tabular}{c c c c}
+   $R_{11}$ & $R_{21}$ & $R_{31}$ & $T_{x}$\\
+   $R_{12}$ & $R_{22}$ & $R_{32}$ & $T_{y}$\\
+   $R_{13}$ & $R_{23}$ & $R_{33}$ & $T_{z}$\\
+   0 & 0 & 0 & 1
+  \end{tabular}
+ \end{center}
+ \caption{Pose as returned by Visual Odometry algorithm}
+\end{table}
+
+The pose consists of the XYZ 3x3 rotation matrix as defined by all $R_{nm}$ and the XYZ translation vector $T_{x/y/z}$. For our purposes the rotation matrix is not that important, because the racing line is only a series of dots. The rotation of the car doesn't influence the result, so all we need is to extract the translation vector, store it in a vector object and write it into a list. This object contains the summation of all translation vectors, making up the position relative to the starting point.
+At this point it is simply a matter of connecting consecutive dots in the list and drawing the resulting lines. The result will be the recorded racing line.
 
 \subsubsection{Sensordata}
-The OBD-II dongle uses bluetooth connection to communicate with our analysis software. Via this connection we can open a serial port to write and read data from.
-The ELM 327 standard determines the formatting of the request and of the return value.
+The OBD-II dongle uses a bluetooth connection to communicate with our analysis software. Via this connection we can open a serial port to write and read data from.
+The ELM 327 standard determines the formatting of the request and return value.
+
 The request consists of the required mode and a Parameter ID (PID), which stands for one specific data value. In mode 1 the dongle returns the current values, which is what we need. Other modes, for example, return the values since the last engine failure or information about the car.
-Once the request is send to the dongle, a hexadecimal encoded value consisting of a specified number of Bytes will be returned. With a formula, which is also specified in the ELM 327 standard, this return sentence can be decoded to an integer number, which represents the real result.
+
+\begin{equation}
+	\label{eq:obd_example}
+		\underbrace{4}_{status code}
+		\underbrace{1}_{mode}
+		\underbrace{0D}_{PID (hex)}
+		\underbrace{37}_{payload}
+\end{equation}
+\begin{center}
+	OBDII example response, returning 55 km/h as the vehicle speed
+\end{center}
+
+Once the request is sent to the dongle, we read the returned hexadecimal encoded value into a buffer. The answer always ends with a >-sign, so we read one character at a time, until we find this symbol. To make sure that the request arrived correctly, the answer contains some extra data (\ref{eq:obd_example}). The first character is the status. Status 4 means the request was understood and a answer could be delivered. The second, third and fourth characters repeat the obtained request. After that, the payload containing the data is appended. With a formula, which is also specified in the ELM 327 standard, this return sentence can be decoded to an integer number, which represents the real result.
+
+\begin{table}[!ht]
+	\begin{center}
+		\begin{tabularx}{\textwidth}{|c | X | c | c | c | c | c |}
+			\hline
+			PID & Size in Bytes & Description & Min value & Max value & Unit & Formula\\ \hline
+			0C & 2 & Engine RPM & 0 & 16 383.75 & rpm & $\frac{256A + B}{4}$\\ \hline
+			0D & 1 & Vehicle speed & 0 & 255 & km/h & $A$\\ \hline
+		\end{tabularx}
+	\end{center}
+	\caption{Excerpt of the available OBD II PIDs, A stands for the first, B for the second Byte}
+\end{table}
 
 \subsection{Comparison}
 \subsubsection{Google Maps}
