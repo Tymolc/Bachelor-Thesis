@@ -18,6 +18,8 @@ So all in all, VO is able of extracting a very detailed depiction of the racing 
 A mobile-range computer (like the Nvidia Jetson TX1) can achieve an average frame rate of about 8 frames per second at a resolution of 672 x 376 px. This is in theory still better than GPS, but it is an average value, potentially becoming a lot slower in feature-dense areas, like forests, and especially corners. The reason VO slows down in corners is, that rather than tracking already existent features points it has to search new points much more frequently than on straights, because the scenery changes much quicker.
 Additionally, VO can only determine a relative difference to the last calculated position. This means, that potential errors, like too shallow corner angles, will result in faulty results throughout the entire path. This can also be seen in figure \ref{fig:vo_gps_comp}. The incoming and outgoing straights should be close to parallel, but the VO image detected them at an angle. If this turn would be repeated, the error would cause the line to not be consistently at the same position every time, without further processing.
 
+Most of these limitations are caused by the desire to achieve a real-time capable solution. If speed is not an issue, the error rate can be reduced a lot. So, for a quick draft it is sensible to use GPS, however if it is possible to record the drive and sufficient to analyze it at a later time, VO creates more accurate results. 
+
 \subsection{Usefulness of Racing Line Comparison}
 \begin{itemize}
   \item professional drivers can achieve similar lap times with very different racing lines

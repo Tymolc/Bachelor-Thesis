@@ -58,6 +58,16 @@ Once the request is sent to the dongle, we read the returned hexadecimal encoded
 
 \subsection{Comparison}
 \subsubsection{Google Maps}
+In order to properly identify important parts of the track, we decided to connect our recorded racing line with Google Maps. As our recording approaches can't extract any geographic information, we need at least two GPS point as a reference. One GPS point isn't enough, because that wouldn't specify the direction the car traveled. As the points returned by VO are in meters, we can calculate the corresponding geo-coordinates in relation to that reference point. 
+
+For that we need the starting latitude $\phi_1$, the starting longitude $\lambda_1$, the bearing $\theta$, which is the angle between two VO-points plus the displacement bearing set by the two reference GPS-coordinates, and the distance $\delta$ traveled, which is the distance between the two VO-points.
+
+The resulting GPS-coordinates are calculated like this:
+
+$\phi_2 = asin(sin \phi_1 * sin \delta + cos \phi_1 * sin \delta * cos \theta)$
+
+$\lambda_2 = \lambda_1 + atan2(sin \theta * sin \delta * cos \phi_1, cos \delta - sin \phi_1 * sin \phi_2)$
+
 \begin{itemize}
 	\item Polyline Overlay
 	\item hidden Polyline for calculations and hover function vs visible, colored Polyline	
