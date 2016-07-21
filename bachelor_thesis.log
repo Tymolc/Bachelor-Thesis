@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.6.2)  20 JUL 2016 21:18
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.6.2)  21 JUL 2016 13:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -877,73 +877,96 @@ Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 [5
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+ppl on input line 20.
- (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsppl.fd
-File: omsppl.fd 
-)
-LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 20.
 File: utils/hpi_logo.pdf Graphic file (type pdf)
-
-<use utils/hpi_logo.pdf>
-Package pdftex.def Info: utils/hpi_logo.pdf used on input line 35.
+ <use utils/hpi_logo.pdf>
+Package pdftex.def Info: utils/hpi_logo.pdf used on input line 72.
 (pdftex.def)             Requested size: 77.05867pt x 36.98866pt.
 
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
 [6]
+Overfull \hbox (14.46326pt too wide) detected at line 144
+[] \OT1/zplm/m/n/12 = [][] []
+ []
+
 File: utils/hpi_logo.pdf Graphic file (type pdf)
- <use utils/hpi_logo.pdf>
-Package pdftex.def Info: utils/hpi_logo.pdf used on input line 60.
+<use utils/hpi_logo.pdf>
+Package pdftex.def Info: utils/hpi_logo.pdf used on input line 148.
 (pdftex.def)             Requested size: 77.05867pt x 36.98866pt.
 
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
 [7]
-Overfull \hbox (0.50652pt too wide) in paragraph at lines 69--70
+File: utils/hpi_logo.pdf Graphic file (type pdf)
+ <use utils/hpi_logo.pdf>
+Package pdftex.def Info: utils/hpi_logo.pdf used on input line 171.
+(pdftex.def)             Requested size: 77.05867pt x 36.98866pt.
+
+Overfull \vbox (6.17621pt too high) has occurred while \output is active []
+
+
+[8]
+LaTeX Font Info:    Try loading font information for OMS+ppl on input line 175.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsppl.fd
+File: omsppl.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 175.
+File: utils/hpi_logo.pdf Graphic file (type pdf)
+
+<use utils/hpi_logo.pdf>
+Package pdftex.def Info: utils/hpi_logo.pdf used on input line 189.
+(pdftex.def)             Requested size: 77.05867pt x 36.98866pt.
+
+Overfull \vbox (6.17621pt too high) has occurred while \output is active []
+
+
+[9]
+Overfull \hbox (0.50652pt too wide) in paragraph at lines 192--193
 \T1/ppl/m/n/12 and cur-va-ture, with low cur-va-ture al-low-ing the driver to c
 arry more
  []
 
 File: utils/hpi_logo.pdf Graphic file (type pdf)
 <use utils/hpi_logo.pdf>
-Package pdftex.def Info: utils/hpi_logo.pdf used on input line 77.
+Package pdftex.def Info: utils/hpi_logo.pdf used on input line 200.
 (pdftex.def)             Requested size: 77.05867pt x 36.98866pt.
 
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
-[8] <utils/bezier_track.png, id=263, 379.4175pt x 315.1775pt>
+[10] <utils/bezier_track.png, id=279, 379.4175pt x 315.1775pt>
 File: utils/bezier_track.png Graphic file (type png)
 
 <use utils/bezier_track.png>
-Package pdftex.def Info: utils/bezier_track.png used on input line 78.
+Package pdftex.def Info: utils/bezier_track.png used on input line 201.
 (pdftex.def)             Requested size: 384.11221pt x 319.0818pt.
 File: utils/hpi_logo.pdf Graphic file (type pdf)
  <use utils/hpi_logo.pdf>
-Package pdftex.def Info: utils/hpi_logo.pdf used on input line 86.
+Package pdftex.def Info: utils/hpi_logo.pdf used on input line 209.
 (pdftex.def)             Requested size: 77.05867pt x 36.98866pt.
 
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
-[9 <./utils/bezier_track.png>]
-Overfull \hbox (2.16301pt too wide) in paragraph at lines 99--101
+[11 <./utils/bezier_track.png>]
+Overfull \hbox (2.16301pt too wide) in paragraph at lines 222--224
 []\T1/ppl/m/n/12 To speed up sub-se-quent cal-cu-la-tions all con-sec-u-tive ve
 c-tors with the same
  []
 
 File: utils/hpi_logo.pdf Graphic file (type pdf)
 <use utils/hpi_logo.pdf>
-Package pdftex.def Info: utils/hpi_logo.pdf used on input line 101.
+Package pdftex.def Info: utils/hpi_logo.pdf used on input line 224.
 (pdftex.def)             Requested size: 77.05867pt x 36.98866pt.
 
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
-[10]) (./content/implementation.tex
+[12]) (./content/implementation.tex
 File: utils/hpi_logo.pdf Graphic file (type pdf)
  <use utils/hpi_logo.pdf>
 Package pdftex.def Info: utils/hpi_logo.pdf used on input line 27.
@@ -952,7 +975,7 @@ Package pdftex.def Info: utils/hpi_logo.pdf used on input line 27.
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
-[11
+[13
 
 ]
 Overfull \hbox (4.15234pt too wide) in paragraph at lines 54--54
@@ -977,7 +1000,7 @@ Package pdftex.def Info: utils/hpi_logo.pdf used on input line 62.
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
-[12]
+[14]
 File: utils/hpi_logo.pdf Graphic file (type pdf)
  <use utils/hpi_logo.pdf>
 Package pdftex.def Info: utils/hpi_logo.pdf used on input line 74.
@@ -986,7 +1009,7 @@ Package pdftex.def Info: utils/hpi_logo.pdf used on input line 74.
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
-[13]
+[15]
 File: utils/hpi_logo.pdf Graphic file (type pdf)
  <use utils/hpi_logo.pdf>
 Package pdftex.def Info: utils/hpi_logo.pdf used on input line 75.
@@ -995,13 +1018,13 @@ Package pdftex.def Info: utils/hpi_logo.pdf used on input line 75.
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
-[14]) (./content/evaluation.tex
+[16]) (./content/evaluation.tex
 Overfull \hbox (0.12416pt too wide) in paragraph at lines 5--6
 \T1/ppl/m/n/12 Visual Odom-e-try has many the-o-ret-i-cal ad-van-tages over GPS
 . The amount
  []
 
-<utils/VO_corner_comp.png, id=314, 471.7625pt x 328.22626pt>
+<utils/VO_corner_comp.png, id=326, 471.7625pt x 328.22626pt>
 File: utils/VO_corner_comp.png Graphic file (type png)
 
 <use utils/VO_corner_comp.png>
@@ -1015,7 +1038,7 @@ Package pdftex.def Info: utils/hpi_logo.pdf used on input line 14.
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
-[15
+[17
 
  <./utils/VO_corner_comp.png>]
 File: utils/hpi_logo.pdf Graphic file (type pdf)
@@ -1026,7 +1049,7 @@ Package pdftex.def Info: utils/hpi_logo.pdf used on input line 20.
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
-[16]
+[18]
 File: utils/hpi_logo.pdf Graphic file (type pdf)
  <use utils/hpi_logo.pdf>
 Package pdftex.def Info: utils/hpi_logo.pdf used on input line 30.
@@ -1035,7 +1058,7 @@ Package pdftex.def Info: utils/hpi_logo.pdf used on input line 30.
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
-[17]) (./content/futureWork.tex
+[19]) (./content/futureWork.tex
 File: utils/hpi_logo.pdf Graphic file (type pdf)
  <use utils/hpi_logo.pdf>
 Package pdftex.def Info: utils/hpi_logo.pdf used on input line 8.
@@ -1044,7 +1067,7 @@ Package pdftex.def Info: utils/hpi_logo.pdf used on input line 8.
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
-[18
+[20
 
 ]) (./content/conclusion.tex
 File: utils/hpi_logo.pdf Graphic file (type pdf)
@@ -1055,7 +1078,7 @@ Package pdftex.def Info: utils/hpi_logo.pdf used on input line 4.
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
-[19
+[21
 
 ]) (./bachelor_thesis.bbl
 babelbib: Using the BibTeX style's default font for `name'.
@@ -1082,7 +1105,7 @@ Package pdftex.def Info: utils/hpi_logo.pdf used on input line 135.
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
-[20
+[22
 
 ] (./content/appendix.tex
 File: utils/hpi_logo.pdf Graphic file (type pdf)
@@ -1093,7 +1116,7 @@ Package pdftex.def Info: utils/hpi_logo.pdf used on input line 4.
 Overfull \vbox (6.17621pt too high) has occurred while \output is active []
 
 
-[21
+[23
 
 ])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 140.
@@ -1106,11 +1129,11 @@ Package rerunfilecheck Info: File `bachelor_thesis.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 140.
  ) 
 Here is how much of TeX's memory you used:
- 12448 strings out of 493304
- 181632 string characters out of 6139872
+ 12474 strings out of 493304
+ 181892 string characters out of 6139872
  365261 words of memory out of 5000000
- 15566 multiletter control sequences out of 15000+600000
- 44880 words of font info for 83 fonts, out of 8000000 for 9000
+ 15577 multiletter control sequences out of 15000+600000
+ 54850 words of font info for 107 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  40i,16n,55p,893b,824s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
@@ -1123,10 +1146,10 @@ uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/t
 exlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on bachelor_thesis.pdf (27 pages, 346151 bytes).
+Output written on bachelor_thesis.pdf (29 pages, 353223 bytes).
 PDF statistics:
- 412 PDF objects out of 1000 (max. 8388607)
- 338 compressed objects within 4 object streams
- 66 named destinations out of 1000 (max. 500000)
- 433 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 425 PDF objects out of 1000 (max. 8388607)
+ 347 compressed objects within 4 object streams
+ 68 named destinations out of 1000 (max. 500000)
+ 445 words of extra memory for PDF output out of 10000 (max. 10000000)
 

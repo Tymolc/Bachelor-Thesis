@@ -16,15 +16,138 @@ At first we need two consecutive, rectified camera images. It is important that 
 Our solution uses the Harris corner detection method for determining features. Finding corners in an image is a very important prerequisite for the final position determination, because it allows us to calculate direction vector to another point. This other point being the same feature in the following camera frame, where the Harris detector is used, as well.
 
 Having two sets of corners from either image we can track each feature from one frame to another. 
-\begin{itemize}
-    \item Lucas-Kanade?
-    \item Jacobian?
-\end{itemize}
+
+The Lucas-Kanade method is a way to estimate optical flow from these sets. It observes a local neighborhood around the detected corners and solves the optical flow equation by the least-squares-criterion.
+
+The optical flow equation for a 2D case states that a pixel at position (x, y, t), with t being the time, and intensity $I(x, y, t)$ will have the same intensity after a displacement by $\Delta x, \Delta y$ and $\Delta t$:
+
+\begin{center}
+\large
+$I(x, y, t) = I(x + \Delta x, y + \Delta y, t + \Delta t)$
+\normalsize
+\end{center}
+
+Applying the Taylor series, we get:
+
+\begin{center}
+\large
+$I(x + \Delta x, y + \Delta y, t + \Delta t) = I(x, y, t) + \frac{\delta I}{\delta x}\Delta x + \frac{\delta I}{\delta y}\Delta y + \frac{\delta I}{\delta t}\Delta t$
+\normalsize
+\end{center}
+
+It follows that: 
+
+\begin{center}
+\large
+$\frac{\delta I}{\delta x}\Delta x + \frac{\delta I}{\delta y}\Delta y + \frac{\delta I}{\delta t}\Delta t = 0$
+\normalsize
+\end{center}
+
+or
+
+\begin{center}
+\large
+$\frac{\delta I}{\delta x}\frac{\Delta x}{\Delta t} + \frac{\delta I}{\delta y}\frac{\Delta y}{\Delta t} + \frac{\delta I}{\delta t}\frac{\Delta t}{\Delta t} = 0$
+\normalsize
+\end{center}
+
+which results in 
+
+\begin{center}
+\large
+$\frac{\delta I}{\delta x}\Delta V_x + \frac{\delta I}{\delta y}\Delta V_y + \frac{\delta I}{\delta t} = 0$
+\normalsize
+\end{center}
+
+where $V_x$ and $V_y$ are the velocity in x and y direction, respectively. $\frac{\delta I}{\delta x}, \frac{\delta I}{\delta y}$ and $\frac{\delta I}{\delta t}$ are the derivatives of the original pixel $(x, y, t)$, which can be written as $I_x, I_y$ and $I_t$.
+Thus the optical flow equation turns out to be
+
+\begin{center}
+\large
+$I_x V_x + I_y V_y = -I_t$
+\normalsize
+\end{center}
+
+This equation is under-determined, however Lukas-Kanade creates an equation system from all detected points, to determine the optical flow vector $(V_x, V_y)$, that can be written as: 
+
+\begin{center}
+\large
+$I_x(q_1) V_x + I_y(q_1) V_y = -I_t(q_1)$\\
+$I_x(q_2) V_x + I_y(q_2) V_y = -I_t(q_2)$\\
+...\\
+$I_x(q_n) V_x + I_y(q_n) V_y = -I_t(q_n)$
+\normalsize
+\end{center}
+
+where $q_1, q_2, ..., q_n$ are the detected corners.
+
+If these equations are written in matrix form Av = b, the result is: 
+
+\[ 
+A=
+\left[
+  \begin{tabular}{cc}
+  $I_x(q_1)$ & $I_y(q_1)$ \\
+  $I_x(q_2)$ & $I_y(q_2)$ \\
+  ... & ... \\
+  $I_x(q_n)$ & $I_y(q_n)$ \\
+  \end{tabular}
+\right],\:
+v =
+\left[
+	\begin{tabular}{c}
+	$V_x$\\
+	$V_y$
+	\end{tabular}
+\right],\:
+and\: b = 
+\left[
+	\begin{tabular}{c}
+	$-I_t(q_1)$\\
+	$-I_t(q_2)$\\
+	...\\
+	$-I_t(q_n)$\\
+	\end{tabular}
+\right]
+\]
+
+This system is now (usually) over-determined. Lucas-Kanade now obtains a solution by minimizing the sum of the squared difference of the results to the determined model.
+In that it solves the 2x2 system
+
+	$v = (A^T A)^(-1) A^T b$
+
+Where $A^T$ is the transpose matrix of A.
+
+The final computation is:
+
+\[
+\left[
+\begin{tabular}{c}
+	$V_x$ \\
+	$V_y$
+\end{tabular}
+\right]
+= 
+\left[
+\begin{tabular}{cc}
+	$\sum_{i = 1}^n I_x(q_i)^2$ & $\sum_{i = 1}^n I_x(q_) I_y(q_i)$ \\
+	$\sum_{i = 1}^n I_y(q_i) I_x(q_i)$ & $\sum_{i = 1}^n I_y(q_)^2$
+\end{tabular}
+\right]
+^{-1}
+\left[
+\begin{tabular}{c}
+	$- \sum_{i = 1}^n I_x(q_i) I_t(q_i)$ \\
+	$- \sum_{i = 1}^n I_y(q_i) I_t(q_i)$ 
+\end{tabular}
+\right]
+\]
+
 Now that we have an end point to every (possible) starting point, we can construct a set of directional vectors.
 Removing outliers (i.e. vectors that are much longer or go in a vastly different direction than most vectors) an approximation translation and rotation the camera conducted during the two frames can be calculated.
 
 Outlier removal is an important stop, because otherwise external movements, like those of other cars on the track, might cause the algorithm to think the camera was moving in a different direction than it actually was.
-To do that we used an iterative method called \textit{Random Sample Consensus} (RANSAC). 
+To do that an iterative method called \textit{Random Sample Consensus} (RANSAC) is used. 
 The RANSAC algorithm works by taking a random subset of all the available data, in our case the vectors obtained by VO, and fitting a linear model with a specified neighborhood which contains this subset. All other vectors are then tested against this model and those who fit the model are considered part of the \textit{consensus set}.
 If enough vectors lie within this model, it is considered as a viable candidate for a linear approximation. Optionally, the model can be re-evaluated using all vectors in the consensus set.
 
