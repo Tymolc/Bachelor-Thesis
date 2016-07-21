@@ -15,7 +15,16 @@ At first we need two consecutive, rectified camera images. It is important that 
 
 Our solution uses the Harris corner detection method for determining features. Finding corners in an image is a very important prerequisite for the final position determination, because it allows us to calculate direction vector to another point. This other point being the same feature in the following camera frame, where the Harris detector is used, as well.
 
-Having two sets of corners from either image we can track each feature from one frame to another. 
+These raw data have to be refined for the final step.
+
+Outlier removal is an important stop, because otherwise external movements, like those of other cars on the track, might cause the algorithm to think the camera was moving in a different direction than it actually was.
+To do that an iterative method called \textit{Random Sample Consensus} (RANSAC) is used. 
+The RANSAC algorithm works by taking a random subset of all the available data, in our case the vectors obtained by the corner detector, and fitting a linear model with a specified neighborhood which contains this subset. All other vectors are then tested against this model and those who fit the model are considered part of the \textit{consensus set}.
+If enough vectors lie within this model, it is considered as a viable candidate for a linear approximation. Optionally, the model can be re-evaluated using all vectors in the consensus set.
+
+This sequence of events is repeated a fixed amount of times, each time producing a model which is rejected, because it contains too few inliers, or a refined model, if the model consists of more inliers than the best model so far.
+
+Having two sets of viable corners from either image we can track each feature from one frame to another. 
 
 The Lucas-Kanade method is a way to estimate optical flow from these sets. It observes a local neighborhood around the detected corners and solves the optical flow equation by the least-squares-criterion.
 
@@ -143,18 +152,10 @@ The final computation is:
 \right]
 \]
 
-Now that we have an end point to every (possible) starting point, we can construct a set of directional vectors.
-Removing outliers (i.e. vectors that are much longer or go in a vastly different direction than most vectors) an approximation translation and rotation the camera conducted during the two frames can be calculated.
+$V_x$ and $V_y$ are now the approximate displacements of every viable corner from one frame to another and can be used to determine the translation and rotation of the vehicle.
 
-Outlier removal is an important stop, because otherwise external movements, like those of other cars on the track, might cause the algorithm to think the camera was moving in a different direction than it actually was.
-To do that an iterative method called \textit{Random Sample Consensus} (RANSAC) is used. 
-The RANSAC algorithm works by taking a random subset of all the available data, in our case the vectors obtained by VO, and fitting a linear model with a specified neighborhood which contains this subset. All other vectors are then tested against this model and those who fit the model are considered part of the \textit{consensus set}.
-If enough vectors lie within this model, it is considered as a viable candidate for a linear approximation. Optionally, the model can be re-evaluated using all vectors in the consensus set.
-
-This sequence of events is repeated a fixed amount of times, each time producing a model which is rejected, because it contains too few inliers, or a refined model, if the model consists of more inliers than the best model so far.
-
-If the taken path includes loops it is possible to optimize the result by using loop detection. If any features are re-detected at a later point in time and the current position is close to the position the features were re-detected, the path can be stretched in a way that it connects to the earlier path.
-This can reduce errors that accumulated due to small estimation errors in the previous steps.
+If the taken path includes loops it is possible to optimize the result by using loop detection. If any features are re-detected at a later point in time and the current position is close to the position the features were re-detected, the path can be stretched, so that it connects to the earlier path.
+This can reduce faulty results that accumulated due to small estimation errors in the previous steps.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %TODO:
@@ -177,7 +178,37 @@ If the driven track is know or the camera is capable of determining a scale (e.g
 \end{itemize}
 
 \subsubsection{Recording OBD2 Data}
-\textit{Definition} OBD II (On-board diagnostics 2) is an interface which all cars build after 1996 in the USA or after 2003 in the EU, respectively, have to have built-in. It implements the SAE J1962 standard which provides standardized PIDs that return specific car-based sensor data, like the current speed, current motor revolution (rpm), throttle position and more.
+\textit{Definition} OBD II (On-board diagnostics 2) is an interface which all cars build after 1996 in the USA or after 2003 in the EU, respectively, have to have built-in. It implements the ELM 327 standard which provides standardized PIDs that return specific car-based sensor data, like the current speed, current motor revolution (rpm), throttle position and more. Connections to the interface are made via a Bluetooth- or USB-adapter.
+
+The standard also determines the formatting of the request and return value.
+
+The request consists of the required mode and a Parameter ID (PID), which stands for one specific data value. In mode 1 the dongle returns the current values, which is what we need. Other modes, for example, return the values since the last engine failure or information about the car. This request is written to the adapter via a serial port.
+
+\begin{equation}
+	\label{eq:obd_example}
+		\underbrace{4}_{status code}
+		\underbrace{1}_{mode}
+		\underbrace{0D}_{PID (hex)}
+		\underbrace{37}_{payload}
+\end{equation}
+\begin{center}
+	OBDII example response, returning 55 km/h as the vehicle speed
+\end{center}
+
+To make sure that the request arrived correctly, the answer, which will be returned immediately after the request was received, contains some extra data (\ref{eq:obd_example}). The first character is the status. Status 4 means the request was understood and a answer could be delivered. The second, third and fourth characters repeat the obtained request. After that, the payload containing the data is appended. With a formula, which is also specified in the ELM 327 standard, this return sentence can be decoded to an integer number, which represents the real result.
+
+\begin{table}[!ht]
+	\begin{center}
+		\begin{tabularx}{\textwidth}{|c | X | c | c | c | c | c |}
+			\hline
+			PID & Size in Bytes & Description & Min value & Max value & Unit & Formula\\ \hline
+			0C & 2 & Engine RPM & 0 & 16 383.75 & rpm & $\frac{256A + B}{4}$\\ \hline
+			0D & 1 & Vehicle speed & 0 & 255 & km/h & $A$\\ \hline
+		\end{tabularx}
+	\end{center}
+	\caption{Excerpt of the available OBD II PIDs, A stands for the first, B for the second Byte}
+\end{table}
+
 A data request is possible about 10 times per second. This gives us a good basis for further detailed comparisons combined with the racing line recording.
 
 \subsection{Comparing}

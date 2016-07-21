@@ -7,6 +7,7 @@ Most of the image processing steps were implemented using OpenCV, an open-source
 \subsubsection{Visual Odometry}
 To extract the Visual Odometry data from the video stream, we used a library called libviso2, which was developed at the Karlsruhe Institute of Technology (KIT). The library needs a left and right hand, rectified image from a stereo camera. The ZED camera from Stereolabs we used already rectifies the images, so we only need to convert the received stereo image into two data buffers.
 For that the left and right image is stored in each one OpenCV Mat, converted into grayscale and then transformed into a uchar buffer.
+To receive the images from the camera, we created a CameraHelper class, which centrally grabs the frames and distributes them to the different modules, like the RacingLineDetector, FlagDetector, etc.
 Now that the prerequisites are met, we can feed the images to our library.
 After analyzing the input as described in section \ref{subsec:vo}, the output will be a 4x4-matrix, the so called pose.
 
@@ -22,39 +23,65 @@ After analyzing the input as described in section \ref{subsec:vo}, the output wi
  \caption{Pose as returned by Visual Odometry algorithm}
 \end{table}
 
-The pose consists of the XYZ 3x3 rotation matrix as defined by all $R_{nm}$ and the XYZ translation vector $T_{x/y/z}$. For our purposes the rotation matrix is not that important, because the racing line is only a series of dots. The rotation of the car doesn't influence the result, so all we need is to extract the translation vector, store it in a vector object and write it into a list. This object contains the summation of all translation vectors, making up the position relative to the starting point.
+The pose consists of the XYZ 3x3 rotation matrix as defined by all $R_{nm}$ and the XYZ translation vector $T_{x/y/z}$. 
+
+\begin{lstlisting}
+Mat pose; //position relative to last position
+Mat motionMat; //position relative to starting point
+
+while(!finished){
+	//library processing
+	pose = pose * motionMat;
+
+	float diffX = (pose.at<float>(0, 3));
+	float diffZ = (pose.at<float>(1, 3));
+	Point2d position = Point2d(diffX, diffY);
+	//JSON-object creation 
+}
+\end{lstlisting}
+
+For our purposes the rotation matrix is not that important, because the racing line is only a series of dots. The rotation of the car doesn't influence the result, so all we need is to extract the translation vector, store it in a vector object and write it into a list. This object contains the summation of all translation vectors, making up the position relative to the starting point.
 At this point it is simply a matter of connecting consecutive dots in the list and drawing the resulting lines. The result will be the recorded racing line.
 
 \subsubsection{Sensordata}
-The OBD-II dongle uses a bluetooth connection to communicate with our analysis software. Via this connection we can open a serial port to write and read data from.
-The ELM 327 standard determines the formatting of the request and return value.
+The OBD-II dongle uses a bluetooth connection to communicate with our analysis software. Via this connection, which is created automatically at startup by the operating system of our processing unit, we can open a serial port to write and read data from.
 
-The request consists of the required mode and a Parameter ID (PID), which stands for one specific data value. In mode 1 the dongle returns the current values, which is what we need. Other modes, for example, return the values since the last engine failure or information about the car.
+Once the connection is established, the serial connection has to be prepared for the specific settings of the dongle.
+A couple of control commands put it into the state that we can work with: 
 
-\begin{equation}
-	\label{eq:obd_example}
-		\underbrace{4}_{status code}
-		\underbrace{1}_{mode}
-		\underbrace{0D}_{PID (hex)}
-		\underbrace{37}_{payload}
-\end{equation}
-\begin{center}
-	OBDII example response, returning 55 km/h as the vehicle speed
-\end{center}
+\begin{lstlisting}
+void SensorDataCollector::initialize(int fd) {
+	waitForAnswer(fd, "ATZ");	//reset device
+	waitForAnswer(fd, "ATL1");	//enable linefeed
+	waitForAnswer(fd, "ATSP0");	//autodetect protocol
+}
+\end{lstlisting}
 
-Once the request is sent to the dongle, we read the returned hexadecimal encoded value into a buffer. The answer always ends with a >-sign, so we read one character at a time, until we find this symbol. To make sure that the request arrived correctly, the answer contains some extra data (\ref{eq:obd_example}). The first character is the status. Status 4 means the request was understood and a answer could be delivered. The second, third and fourth characters repeat the obtained request. After that, the payload containing the data is appended. With a formula, which is also specified in the ELM 327 standard, this return sentence can be decoded to an integer number, which represents the real result.
+The function \textit{waitForAnswer} writes the request to the dongle and returns the answer to an optional buffer. For the initialization this buffer is irrelevant, but as soon as we want to receive data, it is necessary.
 
-\begin{table}[!ht]
-	\begin{center}
-		\begin{tabularx}{\textwidth}{|c | X | c | c | c | c | c |}
-			\hline
-			PID & Size in Bytes & Description & Min value & Max value & Unit & Formula\\ \hline
-			0C & 2 & Engine RPM & 0 & 16 383.75 & rpm & $\frac{256A + B}{4}$\\ \hline
-			0D & 1 & Vehicle speed & 0 & 255 & km/h & $A$\\ \hline
-		\end{tabularx}
-	\end{center}
-	\caption{Excerpt of the available OBD II PIDs, A stands for the first, B for the second Byte}
-\end{table}
+\begin{lstlisting}
+void SensorDataCollector::
+	waitForAnswer(int fd, char *buf, string request) {
+	int nbuf = 0;
+	int i = 0;
+	const int TIMEOUT = 30;
+	bool end_of_answer = false;
+
+	request.append("\r"); //tells the dongle where the request ends
+	long writtenBytes = write(fd, request.c_str(), strlen(request.c_str()));
+	if (writtenBytes < 0) {
+		//errorhandling
+	}
+	while (!end_of_answer && i < TIMEOUT) {
+		long n = read(fd, buf + nbuf, sizeof buf); //read one char at a time
+		nbuf += n;
+		i++;
+		end_of_answer = receivedAnswer(buf); //receivedAnswer checks if last character was a >
+	}
+}
+\end{lstlisting}
+
+Now, after determining which PIDs are supported by the car (using PID 0100), we constantly loop through all of them and calculate the corresponding value. Together with the description, this value is then sent to our server as a JSON object.
 
 \subsection{Comparison}
 \subsubsection{Google Maps}
@@ -64,9 +91,32 @@ For that we need the starting latitude $\phi_1$, the starting longitude $\lambda
 
 The resulting GPS-coordinates are calculated like this:
 
-$\phi_2 = asin(sin \phi_1 * sin \delta + cos \phi_1 * sin \delta * cos \theta)$
+\begin{lstlisting}[language=JavaScript]
+for (var k = 1; k < voData.length; k++) {
+	calculatedGPS[k] = {};
+
+	var d = Math.sqrt(Math.pow((voData[k].x - voData[0].x - xCorrection), 2) + Math.pow((voData[k].y - voData[0].y - yCorrection), 2)) * voScaleFactor / 1000;
+	var stdVec = [0, 1];
+	var pointVec = [voData[k].x - voData[0].x - xCorrection, voData[k].y - voData[0].y - yCorrection];
+
+	var bearingOfVoPoint = ((stdVec[0]*pointVec[0])+(stdVec[1]*pointVec[1]))/(Math.sqrt(Math.pow(stdVec[0], 2)+Math.pow(stdVec[1], 2))*Math.sqrt(Math.pow(pointVec[0], 2)+Math.pow(pointVec[1], 2)));
+	bearingOfVoPoint = Math.acos(bearingOfVoPoint);
+	bearingOfVoPoint = (pointVec[0] >= 0) ? bearingOfVoPoint : (2*Math.PI)-bearingOfVoPoint;
+	bearingOfVoPoint += rotation;
+
+	var lat2 = Math.asin( Math.sin(lat1)*Math.cos(d/R) + Math.cos(lat1)*Math.sin(d/R)*Math.cos(bearingOfVoPoint) );
+	var lng2 = lng1 + Math.atan2(Math.sin(bearingOfVoPoint)*Math.sin(d/R)*Math.cos(lat1), Math.cos(d/R)-Math.sin(lat1)*Math.sin(lat2));
+	lat2 = deg(lat2);
+	lng2 = deg(lng2);
+
+	calculatedGMapsPoints.push(new google.maps.LatLng(lat2, lng2));
+}
+\end{lstlisting}
+
+$\phi_2 = asin(sin \phi_1 * cos \delta + cos \phi_1 * sin \delta * cos \theta)$
 
 $\lambda_2 = \lambda_1 + atan2(sin \theta * sin \delta * cos \phi_1, cos \delta - sin \phi_1 * sin \phi_2)$
+
 
 \begin{itemize}
 	\item Polyline Overlay
