@@ -281,6 +281,11 @@ INPUT utils/hpi_logo.pdf
 INPUT ./utils/hpi_logo.pdf
 INPUT utils/hpi_logo.pdf
 INPUT ./utils/hpi_logo.pdf
+INPUT utils/tablet_with_driver_comparison.png
+INPUT ./utils/tablet_with_driver_comparison.png
+INPUT ./utils/tablet_with_driver_comparison.png
+INPUT utils/hpi_logo.pdf
+INPUT ./utils/hpi_logo.pdf
 INPUT utils/racing_line_recording.png
 INPUT ./utils/racing_line_recording.png
 INPUT ./utils/racing_line_recording.png
@@ -292,11 +297,6 @@ INPUT ./utils/hpi_logo.pdf
 INPUT utils/driver_detail_screenshot.png
 INPUT ./utils/driver_detail_screenshot.png
 INPUT ./utils/driver_detail_screenshot.png
-INPUT utils/driver_comparison_with_overlay.png
-INPUT ./utils/driver_comparison_with_overlay.png
-INPUT ./utils/driver_comparison_with_overlay.png
-INPUT utils/hpi_logo.pdf
-INPUT ./utils/hpi_logo.pdf
 INPUT utils/hpi_logo.pdf
 INPUT ./utils/hpi_logo.pdf
 INPUT content/relatedWork.tex
@@ -308,6 +308,11 @@ INPUT utils/hpi_logo.pdf
 INPUT ./utils/hpi_logo.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplri8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplri8r.tfm
+INPUT utils/euler_spiral.png
+INPUT ./utils/euler_spiral.png
+INPUT ./utils/euler_spiral.png
+INPUT utils/hpi_logo.pdf
+INPUT ./utils/hpi_logo.pdf
 INPUT utils/hpi_logo.pdf
 INPUT ./utils/hpi_logo.pdf
 INPUT content/algorithms.tex

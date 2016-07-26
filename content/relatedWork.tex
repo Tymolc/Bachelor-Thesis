@@ -12,4 +12,19 @@ RaceOptimal is a website that offers calculated ideal racing lines for 4 differe
 This algorithm is used on a certain number of possible lines, the initial population. These solution then breed offspring, which are combinations of the initial parents, and are modified randomly, to get as many different racing lines as possible.
 The best children are kept and breed again, bad solutions will be thrown away. This process is repeated until the result, being the lap time on the given track, stays consistent.
 
+\subsubsection{Optimal Control}
+Optimal control is an optimization method that, in general, tries to minimize a cost function of control variables in a dynamic system. In case of racing line optimization, the cost function is the lap time, the control variables are steering angle and throttle/break input and the dynamic system is a vehicle model restricted to the boundaries of the road \cite{gustafsson08}.
+
+\subsubsection{Euler Spiral Method}
+An Euler spiral is a curve whose curvature changes linearly with its curve length. They can be used to connect a tangent to a circular curve, which can be translated to connecting a straight with a curve on a track \cite{xiong09}.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=.5\textwidth]{euler_spiral}
+	\caption{A double-ended Euler spiral}
+	\label{fig:euler_spiral}
+\end{figure}
+
+The racing line follows a segment of the Euler spiral that connects the starting point with the end point. This come close to minimizing the curvature, but does not completely reach the minimum. Also there are multiple segments that connect two points, so as we usually want to get the least curvature, we take the segment with the biggest radius.
+
 \clearpage

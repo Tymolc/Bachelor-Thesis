@@ -17,7 +17,7 @@ Our solution uses the Harris corner detection method for determining features. F
 
 These raw data have to be refined for the final step.
 
-Outlier removal is an important stop, because otherwise external movements, like those of other cars on the track, might cause the algorithm to think the camera was moving in a different direction than it actually was.
+Outlier removal is an important step, because otherwise external movements, like those of other cars on the track, might cause the algorithm to think the camera was moving in a different direction than it actually was.
 To do that an iterative method called \textit{Random Sample Consensus} (RANSAC) is used. 
 The RANSAC algorithm works by taking a random subset of all the available data, in our case the vectors obtained by the corner detector, and fitting a linear model with a specified neighborhood which contains this subset. All other vectors are then tested against this model and those who fit the model are considered part of the \textit{consensus set}.
 If enough vectors lie within this model, it is considered as a viable candidate for a linear approximation. Optionally, the model can be re-evaluated using all vectors in the consensus set.
@@ -178,7 +178,7 @@ If the driven track is know or the camera is capable of determining a scale (e.g
 \end{itemize}
 
 \subsubsection{Recording OBD2 Data}
-\textit{Definition} OBD II (On-board diagnostics 2) is an interface which all cars build after 1996 in the USA or after 2003 in the EU, respectively, have to have built-in. It implements the ELM 327 standard which provides standardized PIDs that return specific car-based sensor data, like the current speed, current motor revolution (rpm), throttle position and more. Connections to the interface are made via a Bluetooth- or USB-adapter.
+OBD II (On-board diagnostics 2) is an interface which all cars build after 1996 in the USA or after 2003 in the EU, respectively, have to have built-in. It implements the ELM 327 standard which provides standardized PIDs that return specific car-based sensor data, like the current speed, current motor revolution (rpm), throttle position and more. Connections to the interface are made via a Bluetooth- or USB-adapter.
 
 The standard also determines the formatting of the request and return value.
 
@@ -209,7 +209,7 @@ To make sure that the request arrived correctly, the answer, which will be retur
 	\caption{Excerpt of the available OBD II PIDs, A stands for the first, B for the second Byte}
 \end{table}
 
-A data request is possible about 10 times per second. This gives us a good basis for further detailed comparisons combined with the racing line recording.
+A data request is possible about 10 times per second. This gives us a good basis for further detailed comparisons combined with the racing line recording, as we can determine additional information like acceleration and breaking points, which gear to shift to or at which parts on the track the engine is under especially heavy load, which might be interesting in a 24-hour-race.
 
 \subsection{Comparing}
 \subsubsection{Visual Comparison of Racing Line with help of sensor data}

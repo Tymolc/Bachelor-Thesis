@@ -1,15 +1,12 @@
 \begin{thebibliography}{}
-  \providebibliographyfont{name}{}%
-  \providebibliographyfont{lastname}{}%
-  \providebibliographyfont{title}{\emph}%
-  \providebibliographyfont{jtitle}{\btxtitlefont}%
-  \providebibliographyfont{etal}{\emph}%
-  \providebibliographyfont{journal}{}%
-  \providebibliographyfont{volume}{}%
-  \providebibliographyfont{ISBN}{\MakeUppercase}%
-  \providebibliographyfont{ISSN}{\MakeUppercase}%
-  \providebibliographyfont{url}{\url}%
-  \providebibliographyfont{numeral}{}%
-  \expandafter\btxselectlanguage\expandafter {\btxfallbacklanguage}
+
+\bibitem[Gustafsson, 2008]{gustafsson08}
+Gustafsson, T. (2008).
+\newblock Computing the ideal racing line using optimal control.
+\newblock Master's thesis, Linköpings tekniska högskola.
+
+\bibitem[Xiong, 2009]{xiong09}
+Xiong, Y. (2009).
+\newblock Racing line optimization.
 
 \end{thebibliography}
