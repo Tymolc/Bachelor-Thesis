@@ -10,7 +10,7 @@ The first category consists of racing line recording concepts and the second one
 Visual Odometry (VO) is a concept that most camera-based robots use for navigation. It uses two consecutive camera frames to calculate the rotation and translation of the camera between them. The advantage over traditional tracking systems like GPS is, that it isn't dependent on any external sources, like satellites or radio towers, to determine the position of the object.
 
 Also it is capable of much higher polling rates than most GPS receivers, which normally poll at 1 Hz, so they get 1 positional update per second. The potential speed of Visual Odometry is linked to the frame rate of the camera. That way, a camera that records at 30 frames per second enables Visual Odometry to estimate a position 30 times a second. 
-The crude algorithm behind VO determines and stores recognizable features in one frame, using a feature detection algorithm.
+The crude algorithm behind VO determines and stores recognizable features in one frame, using a feature detection algorithm and tracks them to a consecutive frame. The displacement of these features determines the direction the camera is traveling.
 At first we need two consecutive, rectified camera images. It is important that the images are rectified, because otherwise the edges of the image would be curved and produce wrong results.
 
 Our solution uses the Harris corner detection method for determining features. Finding corners in an image is a very important prerequisite for the final position determination, because it allows us to calculate direction vector to another point. This other point being the same feature in the following camera frame, where the Harris detector is used, as well.
@@ -168,14 +168,8 @@ This can reduce faulty results that accumulated due to small estimation errors i
 Lane Detection uses markings on a road to determine its lateral boundaries in relation to the recording camera. It is often used in autonomous driving and driving assistance systems, because the position of the car in between lane markings gives a lot of information about the direction the car is traveling. 
 In our case, not only can we determine a traveling direction, but also the position on the lane.
 By tracking the distance to the left and right lane, a deviation to the middle of the lane can be calculated. 
-If the driven track is know or the camera is capable of determining a scale (e.g. by using a stereo camera), the deviation can even be expressed as a metric length, which is helpful for extracting additional information, like speed and acceleration, later on.
-
-
-%TODO: Algorithms
-\begin{itemize}
-  \item possibility to improve recording results on known track
-  \item possibility to determine accurate horizontal position on track
-\end{itemize}
+If the driven track is know or the camera is capable of determining a scale (e.g. by using a stereo camera), the deviation can even be expressed as a metric length, which is helpful for extracting additional information, like speed and acceleration, later on.\\
+Additionally, not only the racing line can be recorded this way, but also the layout of the track. This is especially useful to determine an ideal racing line later on, because this often requires knowledge of the exact appearance of the race track.
 
 \subsubsection{Recording OBD2 Data}
 OBD II (On-board diagnostics 2) is an interface which all cars build after 1996 in the USA or after 2003 in the EU, respectively, have to have built-in. It implements the ELM 327 standard which provides standardized PIDs that return specific car-based sensor data, like the current speed, current motor revolution (rpm), throttle position and more. Connections to the interface are made via a Bluetooth- or USB-adapter.

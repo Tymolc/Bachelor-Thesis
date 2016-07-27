@@ -41,7 +41,8 @@ while(!finished){
 \end{lstlisting}
 
 For our purposes the rotation matrix is not that important, because the racing line is only a series of dots. The rotation of the car doesn't influence the result, so all we need is to extract the translation vector, store it in a vector object and write it into a list. This object contains the summation of all translation vectors, making up the position relative to the starting point.
-At this point it is simply a matter of connecting consecutive dots in the list and drawing the resulting lines. The result will be the recorded racing line.
+At this point it is simply a matter of connecting consecutive dots in the list and drawing the resulting lines. The result will be the recorded racing line.\\
+This racing line can be used on its own, or combined with GPS, as discussed in the Bachelors Thesis "Precise Racing Car Localisation - Improving GPS through Video and Sensors" \ref{hoffmann16}.
 
 \subsubsection{Sensordata}
 The OBD-II dongle uses a bluetooth connection to communicate with our analysis software. Via this connection, which is created automatically at startup by the operating system of our processing unit, we can open a serial port to write and read data from.
@@ -113,13 +114,6 @@ for (var k = 1; k < voData.length; k++) {
 }
 \end{lstlisting}
 
-$\phi_2 = asin(sin \phi_1 * cos \delta + cos \phi_1 * sin \delta * cos \theta)$
+In order to depict the sensor data, we color in every line segment according to a two-color gradient. Because of that, we get a lot of line objects, which make further processing difficult. Our solution was to use a single invisible, hidden polyline, that contains all the line segments. This polyline is wider than the normal lines, to make hovering on it easier and the fact, that it is one single object, improves performance and enables us to easily calculate the length of the racing line.
 
-$\lambda_2 = \lambda_1 + atan2(sin \theta * sin \delta * cos \phi_1, cos \delta - sin \phi_1 * sin \phi_2)$
-
-
-\begin{itemize}
-	\item Polyline Overlay
-	\item hidden Polyline for calculations and hover function vs visible, colored Polyline	
-\end{itemize}
 \clearpage
