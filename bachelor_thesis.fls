@@ -339,6 +339,8 @@ INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/mathpazo/zplmr7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/mathpazo/fplmr.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplr7t.vf
+INPUT utils/hpi_logo.pdf
+INPUT ./utils/hpi_logo.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/mathpazo/zplmr7m.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/mathpazo/fplmri.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
@@ -348,8 +350,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/mathpazo/zplmr7t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/mathpazo/fplmr.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplr7t.vf
-INPUT utils/hpi_logo.pdf
-INPUT ./utils/hpi_logo.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/mathpazo/zplmr7m.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/mathpazo/fplmri.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
@@ -382,13 +382,13 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/mathpazo/fplmr.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/mathpazo/zplmr7y.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
+INPUT utils/hpi_logo.pdf
+INPUT ./utils/hpi_logo.pdf
+INPUT utils/hpi_logo.pdf
+INPUT ./utils/hpi_logo.pdf
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omsppl.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omsppl.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
-INPUT utils/hpi_logo.pdf
-INPUT ./utils/hpi_logo.pdf
-INPUT utils/hpi_logo.pdf
-INPUT ./utils/hpi_logo.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplr8t.tfm
 INPUT utils/hpi_logo.pdf
 INPUT ./utils/hpi_logo.pdf
@@ -411,6 +411,8 @@ INPUT utils/hpi_logo.pdf
 INPUT ./utils/hpi_logo.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/courier/pcrr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/palatino/pplb8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm
 INPUT utils/hpi_logo.pdf
 INPUT ./utils/hpi_logo.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrb8t.tfm
@@ -418,6 +420,8 @@ INPUT utils/hpi_logo.pdf
 INPUT ./utils/hpi_logo.pdf
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/courier/pcrb8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrb8r.tfm
+INPUT utils/hpi_logo.pdf
+INPUT ./utils/hpi_logo.pdf
 INPUT utils/hpi_logo.pdf
 INPUT ./utils/hpi_logo.pdf
 INPUT content/evaluation.tex
@@ -433,6 +437,8 @@ INPUT utils/hpi_logo.pdf
 INPUT ./utils/hpi_logo.pdf
 INPUT content/futureWork.tex
 INPUT content/futureWork.tex
+INPUT utils/hpi_logo.pdf
+INPUT ./utils/hpi_logo.pdf
 INPUT utils/hpi_logo.pdf
 INPUT ./utils/hpi_logo.pdf
 INPUT content/conclusion.tex
