@@ -5,6 +5,11 @@ Gustafsson, T. (2008).
 \newblock Computing the ideal racing line using optimal control.
 \newblock Master's thesis, Linköpings tekniska högskola.
 
+\bibitem[Hoffmann, 2016]{hoffmann16}
+Hoffmann, N. (2016).
+\newblock Precise racing car localisation - improving gps through video and
+  sensors.
+
 \bibitem[Xiong, 2009]{xiong09}
 Xiong, Y. (2009).
 \newblock Racing line optimization.

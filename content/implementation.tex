@@ -39,7 +39,7 @@ After analyzing the input as described in section \ref{subsec:vo}, the output wi
 \end{table}
 
 The pose consists of the XYZ 3x3 rotation matrix as defined by all $R_{nm}$ and the XYZ translation vector $T_{x/y/z}$. 
-
+\clearpage
 \begin{lstlisting}
 Mat pose; //position relative to last position
 Mat motionMat; //position relative to starting point
@@ -57,7 +57,7 @@ while(!finished){
 
 For our purposes the rotation matrix is not that important, because the racing line is only a series of dots. The rotation of the car doesn't influence the result, so all we need is to extract the translation vector, store it in a vector object and write it into a list. This object contains the summation of all translation vectors, making up the position relative to the starting point.
 At this point it is simply a matter of connecting consecutive dots in the list and drawing the resulting lines. The result will be the recorded racing line.\\
-This racing line can be used on its own, or combined with GPS, as discussed in the Bachelors Thesis "Precise Racing Car Localisation - Improving GPS through Video and Sensors" \ref{hoffmann16}.
+This racing line can be used on its own, or combined with GPS, as discussed in the Bachelors Thesis "Precise Racing Car Localisation - Improving GPS through Video and Sensors" \cite{hoffmann16}.
 
 \subsubsection{Sensordata}
 The OBD-II dongle uses a bluetooth connection to communicate with our analysis software. Via this connection, which is created automatically at startup by the operating system of our processing unit, we can open a serial port to write and read data from.
@@ -72,15 +72,11 @@ void SensorDataCollector::initialize(int fd) {
 	waitForAnswer(fd, "ATSP0");	//autodetect protocol
 }
 \end{lstlisting}
-
 The function \textit{waitForAnswer} writes the request to the dongle and returns the answer to an optional buffer. For the initialization this buffer is irrelevant, but as soon as we want to receive data, it is necessary.
-
 \begin{lstlisting}
 void SensorDataCollector::
 	waitForAnswer(int fd, char *buf, string request) {
-	int nbuf = 0;
-	int i = 0;
-	const int TIMEOUT = 30;
+	int nbuf = 0; 	int i = 0;	const int TIMEOUT = 30;
 	bool end_of_answer = false;
 
 	request.append("\r"); //tells the dongle where the request ends
@@ -101,7 +97,7 @@ Now, after determining which PIDs are supported by the car (using PID 0100), we 
 
 \subsection{Comparison}
 \subsubsection{Google Maps}
-In order to properly identify important parts of the track, we decided to connect our recorded racing line with Google Maps. As our recording approaches can't extract any geographic information, we need at least two GPS point as a reference. One GPS point isn't enough, because that wouldn't specify the direction the car traveled. As the points returned by VO are in meters, we can calculate the corresponding geo-coordinates in relation to that reference point. 
+In order to properly identify important parts of the track, we decided to connect our recorded racing line with Google Maps. As our recording approaches can't extract any geographic information, we need at least two GPS points as a reference. One GPS point isn't enough, because that wouldn't specify the direction the car traveled. As the points returned by VO are in meters, we can calculate the corresponding geo-coordinates in relation to that reference point. 
 
 For that we need the starting latitude $\phi_1$, the starting longitude $\lambda_1$, the bearing $\theta$, which is the angle between two VO-points plus the displacement bearing set by the two reference GPS-coordinates, and the distance $\delta$ traveled, which is the distance between the two VO-points.
 
@@ -129,6 +125,6 @@ for (var k = 1; k < voData.length; k++) {
 }
 \end{lstlisting}
 
-In order to depict the sensor data, we color in every line segment according to a two-color gradient. Because of that, we get a lot of line objects, which make further processing difficult. Our solution was to use a single invisible, hidden polyline, that contains all the line segments. This polyline is wider than the normal lines, to make hovering on it easier and the fact, that it is one single object, improves performance and enables us to easily calculate the length of the racing line.
+In order to depict the sensor data, we color in every line segment according to a two-color gradient. Because of that, we get a lot of line objects, which make further processing difficult. Our solution was to use an additional hidden polyline, that contains all the line segments. This polyline is wider than the normal lines, to make hovering on it easier and the fact, that it is one single object, improves performance and enables us to easily calculate the length of the racing line as well.
 
 \clearpage
