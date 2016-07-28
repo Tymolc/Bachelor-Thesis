@@ -1,10 +1,6 @@
 \section{Future Work}
 \label{sec:future_work}
 
-\subsection{Open Research Questions}
-\subsubsection{Real Time Capabilities}
-\subsubsection{Increasing Accuracy}
-
 \subsection{Extensions}
 \subsubsection{Gamification}
 So far drivers already have a simple and accessible way of comparing each other, however our method only provides a direct relation between two drivers. Unless a driver looks at all other drivers racing lines, they can't certainly asses if they drove a particularly fast lap or if the opponent was just slow in general.\\
@@ -14,5 +10,8 @@ Thats why a form of gamification could be implemented. Based on different factor
 Currently, the recording of the racing line can not be achieved completely in real-time with hardware that is power-conscious enough to run with the power provided by a cars battery, as the most powerful hardware that can be considered to fulfill this requirement is the NVidia Jetson TX1, which we used. However, current implementations of Visual Odometry tend to not use the full capabilities of the device, namely they only run on the CPU, while the GPU is running idle. If, either using more powerful hardware or very specifically optimized algorithms, VO could be implemented to run in real-time, i.e. at 30-60 frames per second, this would make it possible to determine an exact location of the car at any point of the race, without the delay of sending the video data to a central, powerful processing unit or the inaccuracy of having to skip frames.\\
 The position could then be transmitted directly to other cars and their drivers to inform them about how they compete in relation to all other drivers. Such an overview could even be shown in a heads-up display directly on the windscreen or, in order to not disturb the driver too much, by informing the team manager of the driver, who can then tell the driver.\\
 The advantage of this process is, that no expensive measurement equipment and, especially, no external dependencies (apart from the communication between the cars) are needed. So it could be used anywhere.
+
+\subsubsection{Improving Accuracy}
+The biggest problem of Visual Odometry is that errors can not easily be removed, as only a relative position to the last point is calculated. If there is an error in this calculation, all other points will also be faulty. One idea is to use occasional GPS measures to get an idea of how far off the recorded racing line is from the actual path. For example, one GPS measurement at the beginning and end of a curve could be used to calculate the actual corner angle and warp the path so that it fits the GPS measurements. 
 
 \clearpage

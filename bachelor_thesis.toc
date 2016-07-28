@@ -21,21 +21,19 @@
 \contentsline {subsubsection}{\numberline {3.2.2}Mathematical Calculation of ideal line given a certain track}{15}{subsubsection.3.2.2}
 \contentsline {subsubsection}{\numberline {3.2.3}Mathematical Comparison of two paths}{16}{subsubsection.3.2.3}
 \contentsline {section}{\numberline {4}Implementation}{18}{section.4}
-\contentsline {subsection}{\numberline {4.1}Recording}{18}{subsection.4.1}
-\contentsline {subsubsection}{\numberline {4.1.1}Visual Odometry}{18}{subsubsection.4.1.1}
-\contentsline {subsubsection}{\numberline {4.1.2}Sensordata}{19}{subsubsection.4.1.2}
-\contentsline {subsection}{\numberline {4.2}Comparison}{21}{subsection.4.2}
-\contentsline {subsubsection}{\numberline {4.2.1}Google Maps}{21}{subsubsection.4.2.1}
-\contentsline {section}{\numberline {5}Evaluation}{24}{section.5}
-\contentsline {subsection}{\numberline {5.1}Visual Odometry to record Racing Lines}{24}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Usefulness of Racing Line Comparison}{26}{subsection.5.2}
-\contentsline {section}{\numberline {6}Future Work}{27}{section.6}
-\contentsline {subsection}{\numberline {6.1}Open Research Questions}{27}{subsection.6.1}
-\contentsline {subsubsection}{\numberline {6.1.1}Real Time Capabilities}{27}{subsubsection.6.1.1}
-\contentsline {subsubsection}{\numberline {6.1.2}Increasing Accuracy}{27}{subsubsection.6.1.2}
-\contentsline {subsection}{\numberline {6.2}Extensions}{27}{subsection.6.2}
-\contentsline {subsubsection}{\numberline {6.2.1}Gamification}{27}{subsubsection.6.2.1}
-\contentsline {subsubsection}{\numberline {6.2.2}Real-Time Comparison}{27}{subsubsection.6.2.2}
-\contentsline {section}{\numberline {7}Conclusion}{29}{section.7}
-\contentsline {section}{Bibliography}{30}{section.7}
-\contentsline {section}{\numberline {A}Appendix}{31}{appendix.A}
+\contentsline {subsection}{\numberline {4.1}Recording}{20}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}Visual Odometry}{20}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Sensordata}{21}{subsubsection.4.1.2}
+\contentsline {subsection}{\numberline {4.2}Comparison}{23}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}Google Maps}{23}{subsubsection.4.2.1}
+\contentsline {section}{\numberline {5}Evaluation}{25}{section.5}
+\contentsline {subsection}{\numberline {5.1}Visual Odometry to record Racing Lines}{25}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Usefulness of Racing Line Comparison}{27}{subsection.5.2}
+\contentsline {section}{\numberline {6}Future Work}{28}{section.6}
+\contentsline {subsection}{\numberline {6.1}Extensions}{28}{subsection.6.1}
+\contentsline {subsubsection}{\numberline {6.1.1}Gamification}{28}{subsubsection.6.1.1}
+\contentsline {subsubsection}{\numberline {6.1.2}Real-Time Comparison}{28}{subsubsection.6.1.2}
+\contentsline {subsubsection}{\numberline {6.1.3}Improving Accuracy}{29}{subsubsection.6.1.3}
+\contentsline {section}{\numberline {7}Conclusion}{30}{section.7}
+\contentsline {section}{Bibliography}{31}{section.7}
+\contentsline {section}{\numberline {A}Appendix}{32}{appendix.A}

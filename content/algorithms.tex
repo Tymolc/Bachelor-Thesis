@@ -157,13 +157,6 @@ $V_x$ and $V_y$ are now the approximate displacements of every viable corner fro
 If the taken path includes loops it is possible to optimize the result by using loop detection. If any features are re-detected at a later point in time and the current position is close to the position the features were re-detected, the path can be stretched, so that it connects to the earlier path.
 This can reduce faulty results that accumulated due to small estimation errors in the previous steps.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%TODO:
-%\begin{itemize}
-%  \item track features from one image to another (Lucas-Kanade-Method)
-%  \item optimize result (Loop-Detection, Algorithm)
-%\end{itemize}
-
 \subsubsection{Lane Detection}
 Lane Detection uses markings on a road to determine its lateral boundaries in relation to the recording camera. It is often used in autonomous driving and driving assistance systems, because the position of the car in between lane markings gives a lot of information about the direction the car is traveling. 
 In our case, not only can we determine a traveling direction, but also the position on the lane.

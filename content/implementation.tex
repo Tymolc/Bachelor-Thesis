@@ -1,7 +1,22 @@
 \section{Implementation}
 \label{sec:implementation}
 
-Most of the image processing steps were implemented using OpenCV, an open-source C++ computer vision library. 
+Most of the image processing steps were implemented using OpenCV, an open-source C++ computer vision library.\\
+Our system was built in a modular way. Each module fulfilled a specific task. The structure can be seen in figure \ref{fig:class_diagram}.
+
+\begin{figure}[!ht]
+\includegraphics[width=\textwidth]{class_diagram}
+\label{fig:class_diagram}
+\end{figure}
+
+The communication to our sensors and the server is depicted in the component diagram (figure \ref{fig:component_diagram})
+
+\begin{figure}[!ht]
+	\includegraphics[width=\textwidth]{component_diagram}
+	\caption{Component Diagram}
+	\label{fig:component_diagram}
+\end{figure}
+\clearpage
 
 \subsection{Recording}
 \subsubsection{Visual Odometry}
