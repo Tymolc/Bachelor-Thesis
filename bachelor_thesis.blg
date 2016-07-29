@@ -7,45 +7,45 @@ Warning--entry type for "xiong09" isn't style-file defined
 --line 15 of file projektbib.bib
 Warning--entry type for "hoffmann16" isn't style-file defined
 --line 29 of file projektbib.bib
-You've used 3 entries,
+You've used 5 entries,
             1935 wiz_defined-function locations,
-            486 strings with 4009 characters,
-and the built_in function-call counts, 749 in all, are:
-= -- 75
-> -- 21
-< -- 3
-+ -- 6
-- -- 6
-* -- 46
-:= -- 154
-add.period$ -- 7
-call.type$ -- 3
-change.case$ -- 18
-chr.to.int$ -- 3
-cite$ -- 3
-duplicate$ -- 31
-empty$ -- 48
-format.name$ -- 9
-if$ -- 135
+            498 strings with 4523 characters,
+and the built_in function-call counts, 1833 in all, are:
+= -- 184
+> -- 57
+< -- 6
++ -- 20
+- -- 18
+* -- 122
+:= -- 314
+add.period$ -- 13
+call.type$ -- 5
+change.case$ -- 34
+chr.to.int$ -- 5
+cite$ -- 5
+duplicate$ -- 85
+empty$ -- 132
+format.name$ -- 25
+if$ -- 377
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 0
-newline$ -- 16
-num.names$ -- 9
-pop$ -- 12
+missing$ -- 2
+newline$ -- 26
+num.names$ -- 15
+pop$ -- 35
 preamble$ -- 1
-purify$ -- 18
+purify$ -- 34
 quote$ -- 0
-skip$ -- 29
+skip$ -- 72
 stack$ -- 0
-substring$ -- 36
-swap$ -- 0
-text.length$ -- 0
+substring$ -- 118
+swap$ -- 20
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 18
+type$ -- 30
 warning$ -- 0
-while$ -- 6
+while$ -- 14
 width$ -- 0
-write$ -- 35
+write$ -- 61
 (There were 2 warnings)

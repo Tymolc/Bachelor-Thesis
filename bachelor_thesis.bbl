@@ -1,5 +1,18 @@
 \begin{thebibliography}{}
 
+\bibitem[Brayshaw and Harrison, 2005]{brayshaw05}
+Brayshaw, D.~L. and Harrison, M.~F. (2005).
+\newblock A quasi steady state approach to race car lap simulation in order to
+  understand the effects of racing line and centre of gravity location.
+\newblock In {\em Proceedings of the Institution of Mechanical Engineers, Part
+  D: Journal of Automobile Engineering}, pages 725--739.
+
+\bibitem[Cardamone et~al., 2010]{cardamone10}
+Cardamone, L., Loiacono, D., Lanzi, P.~L., and Bardelli, A.~P. (2010).
+\newblock Searching for the optimal racing line using genetic algorithms.
+\newblock In {\em Proceedings of the 2010 IEEE Conference on Computational
+  Intelligence and Games}, pages 388--394.
+
 \bibitem[Gustafsson, 2008]{gustafsson08}
 Gustafsson, T. (2008).
 \newblock Computing the ideal racing line using optimal control.

@@ -12,8 +12,10 @@ RaceOptimal\footnote{\url{http://www.raceoptimal.com/}} is a website that offers
 This algorithm is used on a certain number of possible lines, the initial population. These solution then breed offspring, which are combinations of the initial parents, and are modified randomly, to get as many different racing lines as possible.
 The best children are kept and breed again, bad solutions will be thrown away. This process is repeated until the result, being the lap time on the given track, stays consistently quick.
 
+A similar genetic approach is used in this paper: \cite{cardamone10}. Here the track is decomposed into several segments and for each segment a algorithm is applied, that searches the best trade-off between the minimization of the length and curvature of the racing line. To assess the fitness of each genetic iteration, the solution is tested in the TORCS racing simulator\footnote{\url{https://sourceforge.net/projects/torcs/}}.
+
 \subsubsection{Optimal Control}
-Optimal control is an optimization method that, in general, tries to minimize a cost function of control variables in a dynamic system. In case of racing line optimization, the cost function is the lap time, the control variables are steering angle and throttle/break input and the dynamic system is a vehicle model restricted to the boundaries of the road \cite{gustafsson08}.
+Optimal control is an optimization method that, in general, tries to minimize a cost function of control variables in a dynamic system. In case of racing line optimization, the cost function is the lap time, the control variables are steering angle and throttle/break input and the dynamic system is a vehicle model restricted to the boundaries of the road. \cite{gustafsson08,brayshaw05}
 
 \subsubsection{Euler Spiral Method}
 An Euler spiral (figure \ref{fig:euler_spiral}) is a curve whose curvature changes linearly with its curve length. They can be used to connect a tangent to a circular curve, which can be translated to connecting a straight with a curve on a track.\\ \cite{xiong09}
