@@ -1,30 +1,44 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
 
-\bibitem[Brayshaw and Harrison, 2005]{brayshaw05}
-Brayshaw, D.~L. and Harrison, M.~F. (2005).
-\newblock A quasi steady state approach to race car lap simulation in order to
-  understand the effects of racing line and centre of gravity location.
-\newblock In {\em Proceedings of the Institution of Mechanical Engineers, Part
-  D: Journal of Automobile Engineering}, pages 725--739.
+\bibitem{cardamone10}
+L.~Cardamone, D.~Loiacono, P.~L. Lanzi, and A.~P. Bardelli, ``Searching for the
+  optimal racing line using genetic algorithms,'' in {\em Proceedings of the
+  2010 IEEE Conference on Computational Intelligence and Games}, pp.~388--394,
+  Aug 2010.
 
-\bibitem[Cardamone et~al., 2010]{cardamone10}
-Cardamone, L., Loiacono, D., Lanzi, P.~L., and Bardelli, A.~P. (2010).
-\newblock Searching for the optimal racing line using genetic algorithms.
-\newblock In {\em Proceedings of the 2010 IEEE Conference on Computational
-  Intelligence and Games}, pages 388--394.
+\bibitem{gustafsson08}
+T.~Gustafsson, ``Computing the ideal racing line using optimal control,''
+  Master's thesis, Linköpings tekniska högskola, 2008.
 
-\bibitem[Gustafsson, 2008]{gustafsson08}
-Gustafsson, T. (2008).
-\newblock Computing the ideal racing line using optimal control.
-\newblock Master's thesis, Linköpings tekniska högskola.
+\bibitem{brayshaw05}
+D.~L. Brayshaw and M.~F. Harrison, ``A quasi steady state approach to race car
+  lap simulation in order to understand the effects of racing line and centre
+  of gravity location,'' in {\em Proceedings of the Institution of Mechanical
+  Engineers, Part D: Journal of Automobile Engineering}, pp.~725--739, 2005.
 
-\bibitem[Hoffmann, 2016]{hoffmann16}
-Hoffmann, N. (2016).
-\newblock Precise racing car localisation - improving gps through video and
-  sensors.
+\bibitem{xiong09}
+Y.~Xiong, ``Racing line optimization,'' 2009.
 
-\bibitem[Xiong, 2009]{xiong09}
-Xiong, Y. (2009).
-\newblock Racing line optimization.
+\bibitem{harris88}
+C.~Harris and M.~Stephens, ``A combined corner and edge detector.,'' Citeseer,
+  1988.
+
+\bibitem{lucas81}
+B.~D. Lucas, T.~Kanade, {\em et~al.}, ``An iterative image registration
+  technique with an application to stereo vision.,'' in {\em IJCAI}, vol.~81,
+  pp.~674--679, 1981.
+
+\bibitem{tomasi91}
+C.~Tomasi and T.~Kanade, {\em Detection and tracking of point features}.
+\newblock School of Computer Science, Carnegie Mellon Univ. Pittsburgh, 1991.
+
+\bibitem{hoffmann16}
+N.~Hoffmann, ``Precise racing car localisation - improving gps through video
+  and sensors,'' 2016.
+
+\bibitem{maimone07}
+M.~Maimone, Y.~Cheng, and L.~Matthies, ``Two years of visual odometry on the
+  mars exploration rovers,'' {\em Journal of Field Robotics}, vol.~24, no.~3,
+  pp.~169--186, 2007.
 
 \end{thebibliography}

@@ -5,33 +5,32 @@
 \contentsline {subsection}{\numberline {1.1}Motivation}{1}{subsection.1.1}
 \contentsline {subsection}{\numberline {1.2}Project Scope}{2}{subsection.1.2}
 \contentsline {subsection}{\numberline {1.3}Problem Introduction/Description/Context}{3}{subsection.1.3}
-\contentsline {section}{\numberline {2}Related Work}{6}{section.2}
-\contentsline {subsection}{\numberline {2.1}Racing Line calculation}{6}{subsection.2.1}
-\contentsline {subsubsection}{\numberline {2.1.1}Vamos Racing Simulator}{6}{subsubsection.2.1.1}
-\contentsline {subsubsection}{\numberline {2.1.2}RaceOptimal}{6}{subsubsection.2.1.2}
-\contentsline {subsubsection}{\numberline {2.1.3}Optimal Control}{7}{subsubsection.2.1.3}
-\contentsline {subsubsection}{\numberline {2.1.4}Euler Spiral Method}{7}{subsubsection.2.1.4}
-\contentsline {section}{\numberline {3}Algorithm/Concept}{9}{section.3}
-\contentsline {subsection}{\numberline {3.1}Recording}{9}{subsection.3.1}
-\contentsline {subsubsection}{\numberline {3.1.1}Visual Odometry}{9}{subsubsection.3.1.1}
-\contentsline {subsubsection}{\numberline {3.1.2}Lane Detection}{13}{subsubsection.3.1.2}
-\contentsline {subsubsection}{\numberline {3.1.3}Recording OBD2 Data}{13}{subsubsection.3.1.3}
-\contentsline {subsection}{\numberline {3.2}Comparing}{15}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Visual Comparison of Racing Line with help of sensor data}{15}{subsubsection.3.2.1}
-\contentsline {subsubsection}{\numberline {3.2.2}Mathematical Calculation of ideal line given a certain track}{16}{subsubsection.3.2.2}
-\contentsline {subsubsection}{\numberline {3.2.3}Mathematical Comparison of two paths}{17}{subsubsection.3.2.3}
-\contentsline {section}{\numberline {4}Implementation}{18}{section.4}
-\contentsline {subsection}{\numberline {4.1}Recording}{20}{subsection.4.1}
-\contentsline {subsubsection}{\numberline {4.1.1}Visual Odometry}{20}{subsubsection.4.1.1}
-\contentsline {subsubsection}{\numberline {4.1.2}Sensordata}{21}{subsubsection.4.1.2}
-\contentsline {subsection}{\numberline {4.2}Comparison}{23}{subsection.4.2}
-\contentsline {subsubsection}{\numberline {4.2.1}Google Maps}{23}{subsubsection.4.2.1}
-\contentsline {section}{\numberline {5}Evaluation}{25}{section.5}
-\contentsline {subsection}{\numberline {5.1}Visual Odometry to record Racing Lines}{25}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Usefulness of Racing Line Comparison}{27}{subsection.5.2}
-\contentsline {section}{\numberline {6}Future Work}{28}{section.6}
-\contentsline {subsection}{\numberline {6.1}Gamification}{28}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Real-Time Comparison}{28}{subsection.6.2}
-\contentsline {subsection}{\numberline {6.3}Improving Accuracy}{29}{subsection.6.3}
-\contentsline {section}{\numberline {7}Conclusion}{30}{section.7}
-\contentsline {section}{Bibliography}{31}{section.7}
+\contentsline {section}{\numberline {2}Related Work}{8}{section.2}
+\contentsline {subsection}{\numberline {2.1}Vamos Racing Simulator}{8}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}RaceOptimal}{8}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Optimal Control}{9}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Euler Spiral Method}{9}{subsection.2.4}
+\contentsline {section}{\numberline {3}Concept}{11}{section.3}
+\contentsline {subsection}{\numberline {3.1}Recording}{11}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Visual Odometry}{11}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Lane Detection}{15}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.3}Recording OBD2 Data}{15}{subsubsection.3.1.3}
+\contentsline {subsection}{\numberline {3.2}Comparing}{17}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Visual Comparison of Racing Line with help of sensor data}{17}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Mathematical Calculation of ideal line given a certain track}{18}{subsubsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.3}Mathematical Comparison of two paths}{19}{subsubsection.3.2.3}
+\contentsline {section}{\numberline {4}Implementation}{20}{section.4}
+\contentsline {subsection}{\numberline {4.1}Recording}{22}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}Visual Odometry}{22}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Sensordata}{23}{subsubsection.4.1.2}
+\contentsline {subsection}{\numberline {4.2}Comparison}{25}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}Google Maps}{25}{subsubsection.4.2.1}
+\contentsline {section}{\numberline {5}Evaluation}{27}{section.5}
+\contentsline {subsection}{\numberline {5.1}Visual Odometry to record Racing Lines}{27}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Usefulness of Racing Line Comparison}{29}{subsection.5.2}
+\contentsline {section}{\numberline {6}Future Work}{30}{section.6}
+\contentsline {subsection}{\numberline {6.1}Gamification}{30}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Real-Time Comparison}{30}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Improving Accuracy}{31}{subsection.6.3}
+\contentsline {section}{\numberline {7}Conclusion}{32}{section.7}
+\contentsline {section}{Bibliography}{33}{section.7}

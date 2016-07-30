@@ -1,11 +1,12 @@
 \section{Implementation}
 \label{sec:implementation}
 
-Most of the image processing steps were implemented using OpenCV, an open-source C++ computer vision library.\\
+Most of the image processing steps were implemented using OpenCV \footnote{\url{http://opencv.org/}}, an open-source C++ computer vision library.\\
 Our system was built in a modular way. Each module fulfilled a specific task. The structure can be seen in figure \ref{fig:class_diagram}.
 
 \begin{figure}[!ht]
 \includegraphics[width=\textwidth]{class_diagram}
+\caption{Architecture Diagram}
 \label{fig:class_diagram}
 \end{figure}
 
@@ -20,9 +21,9 @@ The communication to our sensors and the server is depicted in the component dia
 
 \subsection{Recording}
 \subsubsection{Visual Odometry}
-To extract the Visual Odometry data from the video stream, we used a library called libviso2, which was developed at the Karlsruhe Institute of Technology (KIT). The library needs a left and right hand, rectified image from a stereo camera. The ZED camera from Stereolabs we used already rectifies the images, so we only need to convert the received stereo image into two data buffers.
-For that the left and right image is stored in each one OpenCV Mat, converted into grayscale and then transformed into a uchar buffer.
-To receive the images from the camera, we created a CameraHelper class, which centrally grabs the frames and distributes them to the different modules, like the RacingLineDetector, FlagDetector, etc.
+To extract the Visual Odometry data from the video stream, we used a library called libviso2\footnote{\url{http://www.cvlibs.net/software/libviso/}}, which was developed at the Karlsruhe Institute of Technology (KIT). The library needs a left and right hand rectified image from a stereo camera. The ZED camera from Stereolabs we used already rectifies the images, so we only need to convert the received stereo image into two data buffers.
+For that the left and right image is stored in one OpenCV Mat each, converted into grayscale and then transformed into a uchar buffer.
+To receive the images from the camera, we created a \texttt{CameraHelper} class, which centrally grabs the frames and distributes them to the different modules, like the \texttt{RacingLineDetector}, \texttt{FlagDetector}, etc.
 Now that the prerequisites are met, we can feed the images to our library.
 After analyzing the input as described in section \ref{subsec:vo}, the output will be a 4x4-matrix, the so called pose.
 
@@ -93,11 +94,11 @@ void SensorDataCollector::
 }
 \end{lstlisting}
 
-Now, after determining which PIDs are supported by the car (using PID 0100), we constantly loop through all of them and calculate the corresponding value. Together with the description, this value is then sent to our server as a JSON object.
+Now, after determining which PIDs are supported by the car (using PID 0100), we constantly loop through all of them and calculate the corresponding value. Together with the description, this value is then sent to our server as a JSON\footnote{JavaScript Object Notation} object.
 
 \subsection{Comparison}
 \subsubsection{Google Maps}
-In order to properly identify important parts of the track, we decided to connect our recorded racing line with Google Maps. As our recording approaches can't extract any geographic information, we need at least two GPS points as a reference. One GPS point isn't enough, because that wouldn't specify the direction the car traveled. As the points returned by VO are in meters, we can calculate the corresponding geo-coordinates in relation to that reference point. 
+In order to properly identify important parts of the track, we decided to connect our recorded racing line with Google Maps. As our recording approaches can not extract any geographic information, we need at least two GPS points as a reference. One GPS point isn't enough, because that wouldn't specify the direction the car traveled. As the points returned by VO are in meters, we can calculate the corresponding geo-coordinates in relation to that reference point. 
 
 For that we need the starting latitude $\phi_1$, the starting longitude $\lambda_1$, the bearing $\theta$, which is the angle between two VO-points plus the displacement bearing set by the two reference GPS-coordinates, and the distance $\delta$ traveled, which is the distance between the two VO-points.
 
