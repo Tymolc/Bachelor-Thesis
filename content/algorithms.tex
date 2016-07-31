@@ -4,7 +4,18 @@
 As this Bachelor Thesis tackles two problems, the algorithms can be divided into two categories.
 The first category consists of racing line recording concepts and the second one of ways to compare these recordings.
 
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\textwidth]{hw_setup}
+\caption{Hardware Setup}
+\label{fig:hw_setup}
+\end{figure}
+
+Figure \ref{fig:hw_setup} show our hardware setup, including all the devices we used to achieve our solution.
+
 \subsection{Recording}
+At first we have to find out which racing line a car has taken. For that a variety of methods were used that work hand in hand to record the racing line itself, the track the car was driving in and data about the car, like speed, throttle position and usage of the brakes. The general concept is explained in Section \ref{sec:intro} Figure \ref{fig:racing_line_recording}.
+
 \subsubsection{Visual Odometry}
 \label{subsec:vo}
 Visual Odometry (VO) is a concept that most camera-based robots use for navigation. It uses two consecutive camera frames to calculate the rotation and translation of the camera between them. The advantage over traditional tracking systems like GPS is that it is not dependent on any external sources (like satellites or radio towers) to determine the position of the object.
@@ -118,7 +129,6 @@ and\: b =
 	\end{tabular}
 \right]
 \]
-
 This system is usually over-determined. Lucas-Kanade now obtains a solution by minimizing the sum of the squared differences of the results to the determined model.
 In that it solves the 2x2 system
 
@@ -191,9 +201,12 @@ To make sure that the request arrived correctly, the answer, which will be retur
 	\caption{Excerpt of the available OBD II PIDs, A stands for the first, B for the second Byte}
 \end{table}
 
-A data request is possible about 10 times per second. This gives us a good basis for further detailed comparisons combined with the racing line recording, as we can determine additional information like acceleration and breaking points, which gear to shift to or at which parts on the track the engine is under especially heavy load, which might be interesting in an endurance race.
+A data request is possible about 10 times per second. This gives us a good basis for further detailed comparisons combined with the racing line recording, as we can determine additional information like acceleration and braking points, which gear to shift to or at which parts on the track the engine is under especially heavy load, which might be interesting in an endurance race.
 
 \subsection{Comparing}
+\label{sec:comparing}
+The second part is the comparison of the previously recorded data. In order to provide an analysis system that has the potential to help racing drivers improve their lap times and beat their opponents, we implemented a comparison method that takes all the available data in consideration and displays them in an understandable way. The process is described in Section \ref{sec:intro} Figure \ref{fig:racing_line_comparison}.
+
 \subsubsection{Visual Comparison of Racing Line with help of sensor data}
 A fairly simple but effective way to find out where time is lost on the track is the visual comparison of racing lines from different drivers. The idea is to overlay the previously recorded lines over the race track. To actually determine at which point a driver was faster than another one, we need an obvious optical representation of the speed at any given point on the track and the possibility to receive further information on demand.
 In our system, the speed is represented by coloring in the racing line on a gradient scale reaching from green (standing still) to red (>250 km/h).

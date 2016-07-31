@@ -1,11 +1,13 @@
 \section{Evaluation}
 \label{sec:evaluation}
+In this section the results we observed using camera based racing line detection in comparison to the traditional method with GPS are discussed. The second part investigates whether and why it is sensible and useful to have a comparison of two drivers racing lines or a calculated ideal line.
 
 \subsection{Visual Odometry to record Racing Lines}
 Visual Odometry has many theoretical advantages over GPS. The amount of data points received is a lot higher, as it produces 1 position per frame, which could realistically result in 30 - 60 positional updates per second, wheres GPS usually produces 1 point per second. This high amount of points makes a detailed comparison and analysis a lot easier, as curves appear mostly smooth instead of having only a couple of straight lines, as seen in figure \ref{fig:vo_gps_comp}.
 
 \begin{figure}[!ht]
-	\includegraphics[width=\textwidth]{VO_corner_comp}
+	\centering
+	\includegraphics[width=.85\textwidth]{VO_corner_comp}
 	\caption{Visual Odometry (blue) produces much smoother curves than GPS (black), but can be erroneous}
 	\label{fig:vo_gps_comp}
 \end{figure}

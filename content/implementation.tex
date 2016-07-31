@@ -2,24 +2,33 @@
 \label{sec:implementation}
 
 Most of the image processing steps were implemented using OpenCV \footnote{\url{http://opencv.org/}}, an open-source C++ computer vision library.\\
-Our system was built in a modular way. Each module fulfilled a specific task. The structure can be seen in figure \ref{fig:class_diagram}.
+Our system was built in a modular way. Each module fulfilled a specific task. The structure can be seen in figure \ref{fig:class_diagram}. The \texttt{Helper} class handles all the communication with the server, in that it sends the data packets, tells the server which hardware is connected to it, receives information about the current session and performs some more helping procedures. Camera handling is done by the \texttt{CameraHelper}.
 
 \begin{figure}[!ht]
+\centering
 \includegraphics[width=\textwidth]{class_diagram}
 \caption{Architecture Diagram}
 \label{fig:class_diagram}
 \end{figure}
 
-The communication to our sensors and the server is depicted in the component diagram (figure \ref{fig:component_diagram})
+\clearpage
+
+The functions that are most important to us are the \texttt{SensorDataCollector}, which is responsible for receiving the cars sensor data via the OBD II dongle and the \texttt{RacingLineDetector}, which records the racing line of the car with the help of our stereo camera.\\
+\texttt{FlagDetector} and \texttt{PotholeDetector} are classes that handle the additional features described in Section \ref{sec:intro}.
 
 \begin{figure}[!ht]
 	\includegraphics[width=\textwidth]{component_diagram}
 	\caption{Component Diagram}
 	\label{fig:component_diagram}
 \end{figure}
-\clearpage
+
+The communication to our sensors and the server is depicted in the component diagram (figure \ref{fig:component_diagram}). All the sensor data is received via the cars CAN Bus and transfered to the OBD II dongle via the OBD II interface. The dongle sets up a bluetooth connection to our Jetson processing unit, where the data is grabbed by our \texttt{SensorDataCollector}. Also the GPS Dongle sends its data to that component via a USB connection.\\
+Our \texttt{CameraHelper} receives the video data transmitted by the stereo camera via USB and distributes them to the video analysis modules.\\
+Lastly, our \texttt{Helper} class collects all the data we extracted and sends them to the web server.
 
 \subsection{Recording}
+We implemented some of the algorithms described in Section \ref{sec:algorithm} in OpenCV and C++, with special focus on the extraction of the racing line from the camera image and the sensor data collection.
+
 \subsubsection{Visual Odometry}
 To extract the Visual Odometry data from the video stream, we used a library called libviso2\footnote{\url{http://www.cvlibs.net/software/libviso/}}, which was developed at the Karlsruhe Institute of Technology (KIT). The library needs a left and right hand rectified image from a stereo camera. The ZED camera from Stereolabs we used already rectifies the images, so we only need to convert the received stereo image into two data buffers.
 For that the left and right image is stored in one OpenCV Mat each, converted into grayscale and then transformed into a uchar buffer.
@@ -40,7 +49,7 @@ After analyzing the input as described in section \ref{subsec:vo}, the output wi
 \end{table}
 
 The pose consists of the XYZ 3x3 rotation matrix as defined by all $R_{nm}$ and the XYZ translation vector $T_{x/y/z}$. 
-\clearpage
+
 \begin{lstlisting}
 Mat pose; //position relative to last position
 Mat motionMat; //position relative to starting point
@@ -97,6 +106,8 @@ void SensorDataCollector::
 Now, after determining which PIDs are supported by the car (using PID 0100), we constantly loop through all of them and calculate the corresponding value. Together with the description, this value is then sent to our server as a JSON\footnote{JavaScript Object Notation} object.
 
 \subsection{Comparison}
+We compared our racing lines using a Google Maps integration in our JavaScript web page. This section describes how the prerequisites mentioned in Section \ref{sec:context} are calculated and implemented.
+
 \subsubsection{Google Maps}
 In order to properly identify important parts of the track, we decided to connect our recorded racing line with Google Maps. As our recording approaches can not extract any geographic information, we need at least two GPS points as a reference. One GPS point isn't enough, because that wouldn't specify the direction the car traveled. As the points returned by VO are in meters, we can calculate the corresponding geo-coordinates in relation to that reference point. 
 

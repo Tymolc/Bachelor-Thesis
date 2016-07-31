@@ -2,9 +2,12 @@
 \label{sec:conclusion}
 In order to develop an accessible racing driver analysis we explored a variety of methods to record and assess the driving behavior of racers. As our system should have as little external dependencies as possible, we looked for methods to do all of the analysis inside the car, which is why camera-based methods were used to record the racing line and race track. 
 
-Additionally, we used the cars on-board sensor data to obtain further information about the driving and consequently enable us to answer complex questions, like the ideal braking and acceleration points on the track.
+We used the cars on-board sensor data to obtain further information about the driving and consequently enable us to answer complex questions, like the ideal braking and acceleration points on the track.
 
 This made it possible to compare two drivers and discover their strengths and weaknesses and how to tackle them to become a better racing driver. Alternatively, an ideal racing line could be calculated, even without prior knowledge of the track with the help of lane detection. This could help even professional drivers improve and achieve best times.
 
-Further improvements can be made through the addition of a gamification system, that gives a level to a driver based on their skill. Also with the help of a more optimized implementation a real-time comparison could be achieved, that could tell a driver at any time how they compare to another driver, e.g. displaying it at a heads-up display directly on the screen.
+Our test drives showed that the Visual Odometry algorithm we used to record the racing line had its advantages and disadvantages. The fact that it runs on video material means, that the analysis doesn't have to take place at the time of the drive. That makes it possible to do the calculations after a race. Consequently we are able to get a lot more positional updates than with GPS, because one update can be calculated per frame, which leads to about 30 positions per second, in contrast to 1 position per second using GPS. 
+However, the fact that the calculations are fairly expensive makes the algorithm only partly usable for a real time use case.
+
+Further improvements can be made through the addition of a gamification system, that gives a level to a driver based on their skill. Also with the help of a more optimized implementation a real-time comparison could be achieved, that could tell a driver at any time how they compare to another driver, e.g. displaying it on a heads-up display.
 \clearpage

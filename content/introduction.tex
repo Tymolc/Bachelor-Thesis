@@ -19,7 +19,8 @@ Additionally, an On-Board-Diagnostic 2 (OBD-II\footnote{\url{http://www.obdii.co
 The analyzed result was then displayed in our web application, which also provided a driver profile page that provides a detailed overview of their recorded laps.
 \clearpage
 
-\subsection{Problem Introduction/Description/Context}
+\subsection{Problem Context}
+\label{sec:context}
 
 \begin{figure}[!ht]
 	\centering
@@ -34,20 +35,21 @@ This made us look into alternatives and we decided to use a stereo camera. A ste
 
 \begin{figure}[!ht]
 		\centering
-		\includegraphics[width=\textwidth]{racing_line_recording}
+		\includegraphics[width=.6\textwidth]{racing_line_recording}
 		\caption{Process Diagram Racing Line Recording}
 		\label{fig:racing_line_recording}
-\end{figure}
-\begin{figure}[!ht]
-	\centering
-	\includegraphics[width=\textwidth]{racing_line_comparison}
-	\caption{Process Diagram Racing Line Comparison}
-	\label{fig:racing_line_comparison}
 \end{figure}
 
 Using techniques that will be described in section \ref{sec:algorithm}, we were able to record the racing line of a car based on a stereo video and GPS. Together with the extracted sensor data from the OBD II interface, we stored the points in a database. The process is depicted in Figure \ref{fig:racing_line_recording}.
 
-Figure \ref{fig:racing_line_comparison} shows how the recorded racing lines can then be compared. We decided to use a Google Maps integration to properly determine where on the track potential improvements can be found. Interesting data values were displayed by coloring in the racing line in case of the detailed driver view (figure \ref{fig:driver_detail}) or using an info window which gives an overview of the data at a given point (figure \ref{fig:comparison_with_overlay}).
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=.5\textwidth]{racing_line_comparison}
+	\caption{Process Diagram Racing Line Comparison}
+	\label{fig:racing_line_comparison}
+\end{figure}
+
+Figure \ref{fig:racing_line_comparison} shows how the recorded racing lines can then be compared. We decided to use a Google Maps integration to properly determine where on the track potential improvements can be found. Because of the nature of our recording algorithms, calculating a relative position that can't on itself be mapped to a geographic location, a few preparations, like calculating the starting point and rotation, have to be done. These are further described in Section \ref{sec:comparing}. Interesting data values were displayed by coloring in the racing line in case of the detailed driver view (figure \ref{fig:driver_detail}) or using an info window which gives an overview of the data at a given point (figure \ref{fig:comparison_with_overlay}).
 
 \begin{figure}[!ht]
 	\includegraphics[width=\textwidth]{driver_detail_screenshot}

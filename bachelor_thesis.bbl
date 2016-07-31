@@ -1,44 +1,46 @@
 \begin{thebibliography}{1}
 
 \bibitem{cardamone10}
-L.~Cardamone, D.~Loiacono, P.~L. Lanzi, and A.~P. Bardelli, ``Searching for the
-  optimal racing line using genetic algorithms,'' in {\em Proceedings of the
-  2010 IEEE Conference on Computational Intelligence and Games}, pp.~388--394,
-  Aug 2010.
+L.~Cardamone, D.~Loiacono, P.~L. Lanzi, and A.~P. Bardelli, ``{Searching for
+  the Optimal Racing Line using Genetic Algorithms},'' in {\em {Proceedings of
+  the 2010 IEEE Conference on Computational Intelligence and Games}},
+  pp.~388--394, Aug 2010.
 
 \bibitem{gustafsson08}
-T.~Gustafsson, ``Computing the ideal racing line using optimal control,''
+T.~Gustafsson, ``{Computing The Ideal Racing Line Using Optimal Control},''
   Master's thesis, Linköpings tekniska högskola, 2008.
 
 \bibitem{brayshaw05}
-D.~L. Brayshaw and M.~F. Harrison, ``A quasi steady state approach to race car
-  lap simulation in order to understand the effects of racing line and centre
-  of gravity location,'' in {\em Proceedings of the Institution of Mechanical
-  Engineers, Part D: Journal of Automobile Engineering}, pp.~725--739, 2005.
+D.~L. Brayshaw and M.~F. Harrison, ``{A Quasi Steady State Approach to Race Car
+  Lap Simulation in Order to Understand the Effects of Racing Line and Centre
+  of Gravity Location},'' in {\em {Proceedings of the Institution of Mechanical
+  Engineers, Part D: Journal of Automobile Engineering}}, pp.~725--739, 2005.
 
 \bibitem{xiong09}
-Y.~Xiong, ``Racing line optimization,'' 2009.
+Y.~Xiong, ``{Racing Line Optimization},'' Master's thesis, Shanghai Jiao Tong
+  University, 2009.
 
 \bibitem{harris88}
-C.~Harris and M.~Stephens, ``A combined corner and edge detector.,'' Citeseer,
-  1988.
+C.~Harris and M.~Stephens, ``{A combined corner and edge detector.},''
+  Citeseer, 1988.
 
 \bibitem{lucas81}
-B.~D. Lucas, T.~Kanade, {\em et~al.}, ``An iterative image registration
-  technique with an application to stereo vision.,'' in {\em IJCAI}, vol.~81,
-  pp.~674--679, 1981.
+B.~D. Lucas, T.~Kanade, {\em et~al.}, ``{An iterative image registration
+  technique with an application to stereo vision.},'' in {\em {IJCAI}},
+  vol.~81, pp.~674--679, 1981.
 
 \bibitem{tomasi91}
-C.~Tomasi and T.~Kanade, {\em Detection and tracking of point features}.
+C.~Tomasi and T.~Kanade, {\em {Detection and tracking of point features}}.
 \newblock School of Computer Science, Carnegie Mellon Univ. Pittsburgh, 1991.
 
 \bibitem{hoffmann16}
-N.~Hoffmann, ``Precise racing car localisation - improving gps through video
-  and sensors,'' 2016.
+N.~Hoffmann, ``{Precise Racing Car Localisation - Improving GPS through Video
+  and Sensors},'' 2016.
+\newblock Bachelor's Thesis.
 
 \bibitem{maimone07}
-M.~Maimone, Y.~Cheng, and L.~Matthies, ``Two years of visual odometry on the
-  mars exploration rovers,'' {\em Journal of Field Robotics}, vol.~24, no.~3,
+M.~Maimone, Y.~Cheng, and L.~Matthies, ``{Two years of visual odometry on the
+  mars exploration rovers},'' {\em Journal of Field Robotics}, vol.~24, no.~3,
   pp.~169--186, 2007.
 
 \end{thebibliography}
