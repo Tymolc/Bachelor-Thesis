@@ -14,7 +14,7 @@ The first category consists of racing line recording concepts and the second one
 Figure \ref{fig:hw_setup} shows our hardware setup, including all the devices we used to achieve our solution. An OBD II dongle is used to extract the cars sensor data, a stereo camera records the drive for further analysis, a mini-computer, in this case the Nvidia Jetson TX1, provides in-car processing of the data and our server is used for post-processing.
 \clearpage
 \subsection{Recording}
-At first we have to find out which racing line a car has taken. For that a variety of methods were used that work together to record the racing line itself, the track the car was driving in and data about the car, like speed, throttle position and usage of the brakes. The general concept is explained in Section \ref{sec:intro} Figure \ref{fig:racing_line_recording} (page \pageref{fig:racing_line_recording}).
+At first we have to find out which racing line a car has taken. For that a variety of methods were used which work together to record the racing line itself, the track the car was driving in and data about the car, like speed, throttle position and usage of the brakes. The general concept is explained in Section \ref{sec:intro} Figure \ref{fig:racing_line_recording} (page \pageref{fig:racing_line_recording}).
 
 \subsubsection{Visual Odometry}
 \label{subsec:vo}
@@ -185,7 +185,7 @@ The request consists of the required mode and a Parameter ID (PID), which stands
 	OBDII example response, returning 55 km/h as the vehicle speed
 \end{center}
 
-To make sure that the request arrived correctly, the answer, which will be returned immediately after the request was received, contains some extra data (\ref{eq:obd_example}). The first character is the status. Status 4 means the request was understood and a answer could be delivered. The second, third and fourth characters repeat the obtained request. After that, the payload containing the data is appended. With a formula, which is also specified in the ELM 327 standard, this return sentence can be decoded to an integer number, which represents the real result.
+To make sure that the request arrived correctly, the answer, which will be returned immediately after the request was received, contains some extra data (\ref{eq:obd_example}). The first character is the status. Status 4 means the request was understood and an answer could be delivered. The second, third and fourth characters repeat the obtained request. After that, the payload containing the data is appended. With a formula, which is also specified in the ELM 327 standard, this return sentence can be decoded to an integer number, which represents the real result.
 
 \begin{table}[!ht]
 	\begin{center}
