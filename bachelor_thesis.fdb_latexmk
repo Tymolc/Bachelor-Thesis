@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex bachelor_thesis"] 1469974581 "bachelor_thesis.aux" "bachelor_thesis.bbl" "bachelor_thesis" 1469974584
+["bibtex bachelor_thesis"] 1469976582 "bachelor_thesis.aux" "bachelor_thesis.bbl" "bachelor_thesis" 1469976584
   "/usr/share/texlive/texmf-dist/bibtex/bst/base/ieeetr.bst" 1292289607 18361 1a00e58565e7f19bf2b3e1bfb82254ae ""
-  "bachelor_thesis.aux" 1469974584 8342 5a3db087aa74c4cc587c83c7b89fc000 ""
+  "bachelor_thesis.aux" 1469976584 8342 5a3db087aa74c4cc587c83c7b89fc000 ""
   "bachelor_thesis.bcf" 0 -1 0 ""
   "projektbib.bib" 1469966611 3169 b7b11d46b023cbbc6a11f75d6261db37 ""
   (generated)
-  "bachelor_thesis.bbl"
   "bachelor_thesis.blg"
-["pdflatex"] 1469974581 "bachelor_thesis.tex" "bachelor_thesis.pdf" "bachelor_thesis" 1469974584
+  "bachelor_thesis.bbl"
+["pdflatex"] 1469976582 "bachelor_thesis.tex" "bachelor_thesis.pdf" "bachelor_thesis" 1469976584
   "/etc/texmf/web2c/texmf.cnf" 1464892955 1101 af7716885e081ab43982cab7b4672c1a ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
@@ -152,11 +152,11 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1392645748 31083 1dfd8bf685ce0009c40532fedf8a7c53 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1464893204 1346346 7f2b8b715a9ddb095afe3697a6ba02b5 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1464893128 3822873 3fbe723c82fd4a223d1d643ec16ef637 ""
-  "bachelor_thesis.aux" 1469974584 8342 5a3db087aa74c4cc587c83c7b89fc000 ""
-  "bachelor_thesis.bbl" 1469974581 1767 17567c261c44148915a83e8b7e6aedb9 "bibtex bachelor_thesis"
-  "bachelor_thesis.out" 1469974584 2210 f605d4779130e2f7981c752948fef0bb ""
-  "bachelor_thesis.tex" 1469968443 5677 122943d73d2673d9ce26c4b1d4e82b28 ""
-  "bachelor_thesis.toc" 1469974584 2836 5d56ea034c8ef20132da57d109f27623 ""
+  "bachelor_thesis.aux" 1469976584 8342 5a3db087aa74c4cc587c83c7b89fc000 ""
+  "bachelor_thesis.bbl" 1469976582 1767 17567c261c44148915a83e8b7e6aedb9 "bibtex bachelor_thesis"
+  "bachelor_thesis.out" 1469976584 2210 f605d4779130e2f7981c752948fef0bb ""
+  "bachelor_thesis.tex" 1469976576 7315 33cf526300eaf7e543ffac492be7eb70 ""
+  "bachelor_thesis.toc" 1469976584 2836 5d56ea034c8ef20132da57d109f27623 ""
   "content/algorithms.tex" 1469971340 15800 2f1c87729753744f639f4b13182c5ef7 ""
   "content/conclusion.tex" 1469974514 1990 7115de5e4791d90e6848da6d0f4998f6 ""
   "content/evaluation.tex" 1469974577 5186 885a9646936f98160176e631bf73f85c ""
@@ -169,7 +169,7 @@
   "utils/bezier_track.png" 1469728974 77927 59f6d7ce30243a0197d355e015e42748 ""
   "utils/class_diagram.png" 1469712709 57695 2a727bf865852f0cf228cbdea996a632 ""
   "utils/codecolors.tex" 1469804494 293 26a70e1bb389ea5f0010fa1aa719e707 ""
-  "utils/commands.tex" 1460928594 9850 ac9f1eac9d1c54d8af69e2f802fc7c17 ""
+  "utils/commands.tex" 1469976406 9852 02ee7ff5128e76d2d6b9ddc8860c4e57 ""
   "utils/component_diagram.png" 1469972206 59236 ba10a4a4fb4bc9a5d8e2125143ed9c7b ""
   "utils/driver_detail_screenshot.png" 1469970720 465625 77c10e49d50cffadc155270e12b6b325 ""
   "utils/environments.tex" 1460928594 339 f1ff70ce781258c5c7fd9d1ad877892c ""
@@ -183,9 +183,9 @@
   "utils/racing_line_recording.png" 1469449795 62160 1650a63ec219587e087642fbeb6e0129 ""
   "utils/tablet_with_driver_comparison.png" 1469530036 1835231 8ce67a31ce6147597c2e5b220f5d44c1 ""
   (generated)
-  "bachelor_thesis.aux"
-  "bachelor_thesis.toc"
-  "bachelor_thesis.log"
   "bachelor_thesis.out"
-  "bachelor_thesis.pdf"
+  "bachelor_thesis.log"
+  "bachelor_thesis.toc"
+  "bachelor_thesis.aux"
   "author.out"
+  "bachelor_thesis.pdf"
