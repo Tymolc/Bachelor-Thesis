@@ -1,7 +1,7 @@
 \section{Concept}
 \label{sec:algorithm}
 \graphicspath{{utils/}}
-As this Bachelor Thesis tackles two problems, the algorithms can be divided into two categories.
+As this bachelor's thesis tackles two problems, the algorithms can be divided into two categories.
 The first category consists of racing line recording concepts and the second one of ways to compare these recordings.
 
 \begin{figure}[!ht]
@@ -11,33 +11,31 @@ The first category consists of racing line recording concepts and the second one
 \label{fig:hw_setup}
 \end{figure}
 
-Figure \ref{fig:hw_setup} show our hardware setup, including all the devices we used to achieve our solution.
-
+Figure \ref{fig:hw_setup} shows our hardware setup, including all the devices we used to achieve our solution. An OBD II dongle is used to extract the cars sensor data, a stereo camera records the drive for further analysis, a mini-computer, in this case the Nvidia Jetson TX1, provides in-car processing of the data and our server is used for post-processing.
+\clearpage
 \subsection{Recording}
-At first we have to find out which racing line a car has taken. For that a variety of methods were used that work hand in hand to record the racing line itself, the track the car was driving in and data about the car, like speed, throttle position and usage of the brakes. The general concept is explained in Section \ref{sec:intro} Figure \ref{fig:racing_line_recording}.
+At first we have to find out which racing line a car has taken. For that a variety of methods were used that work together to record the racing line itself, the track the car was driving in and data about the car, like speed, throttle position and usage of the brakes. The general concept is explained in Section \ref{sec:intro} Figure \ref{fig:racing_line_recording} (page \pageref{fig:racing_line_recording}).
 
 \subsubsection{Visual Odometry}
 \label{subsec:vo}
 Visual Odometry (VO) is a concept that most camera-based robots use for navigation. It uses two consecutive camera frames to calculate the rotation and translation of the camera between them. The advantage over traditional tracking systems like GPS is that it is not dependent on any external sources (like satellites or radio towers) to determine the position of the object.
 
-It is also capable of much higher polling rates than most GPS receivers, which normally poll at 1 Hz, so they get 1 positional update per second. The potential speed of Visual Odometry is linked to the frame rate of the camera. That way, a camera that records at 30 frames per second enables Visual Odometry to estimate a position 30 times a second. 
+It is also capable of much higher polling rates than most GPS receivers, which normally poll at one Hz, so they get one positional update per second. The potential speed of Visual Odometry is linked to the frame rate of the camera. That way, a camera that records at 30 frames per second enables Visual Odometry to estimate a position 30 times a second. 
 The crude algorithm behind VO determines and stores recognizable features in one frame, using a feature detection algorithm and tracks them to a consecutive frame. The displacement of these features determines the direction the camera is traveling.
 At first we need two consecutive, rectified camera images. It is important that the images are rectified, because otherwise the edges of the image would be curved and produce wrong results.
-
+\clearpage
 Our solution uses the Harris corner detection method \cite{harris88} for determining features. Finding corners in an image is a very important prerequisite for the final position determination, because it allows us to calculate a direction vector to another point. This other point is the same feature in the following camera frame, where the Harris detector is used as well.\\
 These raw data have to be refined for the final step.
 
 One important step for the refinement is outlier removal. External movements, like those of other cars on the track, might cause the algorithm to think the camera was moving when in fact the surroundings moved.
 To filter these unwanted movements an iterative method called \textit{Random Sample Consensus} (RANSAC) is used. 
-The RANSAC algorithm works by taking a random subset of all the available data, in our case the vectors obtained by the corner detector, and fitting a linear model with a specified neighborhood which contains this subset. All other vectors are then tested against this model and those who fit the model are considered part of the \textit{consensus set}.
+The RANSAC algorithm works by taking a random subset of all the available data, in our case the vectors obtained by the corner detector, and fitting a linear model with a specified neighborhood, which contains this subset. All other vectors are then tested against this model and those who fit the model are considered part of the \textit{consensus set}.
 If enough vectors lie within this model, it is considered as a viable candidate for a linear approximation. Optionally, the model can be re-evaluated using all vectors in the consensus set.
 
-This sequence of events is repeated a fixed amount of times, each time producing a model which is rejected, because it contains too few inliers, or a refined model, if the model consists of more inliers than the best model so far.
-
-Having two sets of viable corners from each image we can track each feature from one frame to another. 
-
+This sequence of events is repeated a fixed amount of times, each time producing a model which is rejected, because it contains too few inliers, or a refined model, if the model consists of more inliers than the best model so far.\\
+Having two sets of viable corners from each image we can track each feature from one frame to another.\\
 The Lucas-Kanade method \cite{lucas81, tomasi91} is a way to estimate optical flow from these sets. It observes a local neighborhood around the detected corners and solves the optical flow equation by the least-squares-criterion.
-
+\clearpage
 The optical flow equation for a 2D case states that a pixel at position (x, y, t), with t being the time, and intensity $I(x, y, t)$ will have the same intensity after a displacement by $\Delta x, \Delta y$ and $\Delta t$:
 
 \begin{center}
@@ -168,11 +166,11 @@ This can reduce faulty results that accumulated due to small estimation errors i
 Lane Detection uses markings on a road to determine its lateral boundaries in relation to the recording camera. It is often used in autonomous driving and driving assistance systems, because the position of the car in between lane markings gives a lot of information about the direction the car is traveling. 
 In our case, not only can we determine a traveling direction, but also the position on the lane.
 By tracking the distance to the left and right lane, a deviation to the middle of the lane can be calculated. 
-If the driven track is known or the camera is capable of determining a scale (e.g. by using a stereo camera), the deviation can even be expressed as a metric length, which is helpful for extracting additional information, like speed and acceleration, later on.\\
+If the driven track is known or the camera is capable of determining a scale (e.g. by using a stereo camera), the deviation can even be expressed as a metric length, which is helpful for extracting additional information, like speed and acceleration, later on.
 Additionally, not only the racing line can be recorded this way, but also the layout of the track. This is especially useful to determine an ideal racing line later on, because this often requires knowledge of the exact appearance of the race track.
 
 \subsubsection{Recording OBD2 Data}
-OBD II (On-board diagnostics 2) is an interface which all cars built after 1996 in the USA or after 2003 in the EU, respectively, have to have built-in. It implements the ELM 327 standard which provides PIDs that return specific car-based sensor data, like the current speed, current motor revolution (rpm), throttle position and more. Connections to the interface are made via a Bluetooth- or USB-adapter.\\
+OBD II is an interface which all cars built after 1996 in the USA or after 2003 in the EU, respectively, have to have built-in. It implements the ELM 327 standard which provides PIDs that return specific car-based sensor data, like the current speed, current motor revolution (rpm), throttle position and more. Connections to the interface are made via a Bluetooth- or USB-adapter.\\
 The standard also determines the formatting of the request and return value.\\
 The request consists of the required mode and a Parameter ID (PID), which stands for one specific data value. In mode 1 the dongle returns the current values, which is what we need. Other modes, for example return the values since the last engine failure or information about the car. This request is written to the adapter via a serial port.
 
@@ -201,20 +199,15 @@ To make sure that the request arrived correctly, the answer, which will be retur
 	\caption{Excerpt of the available OBD II PIDs, A stands for the first, B for the second Byte}
 \end{table}
 
-A data request is possible about 10 times per second. This gives us a good basis for further detailed comparisons combined with the racing line recording, as we can determine additional information like acceleration and braking points, which gear to shift to or at which parts on the track the engine is under especially heavy load, which might be interesting in an endurance race.
+A data request is possible about 10 times per second. This gives us a good basis for further detailed comparisons combined with the racing line recording, as we can determine additional information like acceleration and braking points, which gear to shift to or at which parts on the track the engine is under especially heavy load.
 
 \subsection{Comparing}
 \label{sec:comparing}
-The second part is the comparison of the previously recorded data. In order to provide an analysis system that has the potential to help racing drivers improve their lap times and beat their opponents, we implemented a comparison method that takes all the available data in consideration and displays them in an understandable way. The process is described in Section \ref{sec:intro} Figure \ref{fig:racing_line_comparison}.
+The second part is the comparison of the previously recorded data. In order to provide an analysis system that has the potential to help racing drivers improve their lap times and beat their opponents, we implemented a comparison method that takes all the available data in consideration and displays them in an understandable way. The process is described in Section \ref{sec:intro} Figure \ref{fig:racing_line_comparison} (page \pageref{fig:racing_line_comparison}).
 
 \subsubsection{Visual Comparison of Racing Line with help of sensor data}
 A fairly simple but effective way to find out where time is lost on the track is the visual comparison of racing lines from different drivers. The idea is to overlay the previously recorded lines over the race track. To actually determine at which point a driver was faster than another one, we need an obvious optical representation of the speed at any given point on the track and the possibility to receive further information on demand.
 In our system, the speed is represented by coloring in the racing line on a gradient scale reaching from green (standing still) to red (>250 km/h).
-
-To do that, we use the HSV color space. Due to the circular structure of HSV (see figure \ref{fig:hsv_gradient}), all we need to do normalize the hue part to green (0 km/h) and red (250+ km/h). The color is then simply a function $f(v) = HSV_{hue}$.\\
-The HSV value has to then be transfered into RGB color space again.
-
-Besides speed data, different values like acceleration, braking behavior or lap time, can be displayed in a similar fashion. That way the fastest line for a given corner can be determined and the slower drivers can find out, why their line was inferior.
 
 \begin{figure}[!ht]
 \centering
@@ -223,13 +216,19 @@ Besides speed data, different values like acceleration, braking behavior or lap 
 \label{fig:hsv_gradient}
 \end{figure}
 
+To do that, we use the HSV\footnote{A color space consisting of Hue, Saturation and Value} color space. Due to the circular structure of HSV (see figure \ref{fig:hsv_gradient}), we can normalize the hue part to green (0 km/h) and red (250+ km/h). The color is then a function $f(v) = HSV_{hue}$.\\
+The HSV value has to be transfered into RGB\footnote{A color space consisting of a Red, Green and Blue share} color space again.
+
+Besides speed data, different values like acceleration, braking behavior or lap time, can be displayed in a similar fashion. That way the fastest line for a given corner can be determined and the slower drivers can find out, why their line was inferior.
+
 \subsubsection{Mathematical Calculation of ideal line given a certain track}
 Besides comparing two driver-generated racing lines, it is also possible to calculate a fast, almost ideal racing line.
 
-Bézier curves are a way to depict an entire race track, i.e. a curved path, with a set of control points, \{P\textsubscript{0}, P\textsubscript{1}, ..., P\textsubscript{n}\} (figure \ref{fig:bezier}. In this definition, n is the order of the curve. P\textsubscript{0} and P\textsubscript{n} stand for the beginning and the end point of the curve, respectively, while the intermediate points define the curvature and don't usually lie on the curve.
+Bézier curves are a way to depict an entire race track, i.e. a curved path, with a set of control points, \{P\textsubscript{0}, P\textsubscript{1}, ..., P\textsubscript{n}\} (figure \ref{fig:bezier}). In this definition, $n$ is the order of the curve. P\textsubscript{0} and P\textsubscript{n} stand for the beginning and the end point of the curve, respectively, while the intermediate points define the curvature and do not usually lie on the curve.
 
 \begin{figure}[!ht]
-\includegraphics[width=\textwidth]{bezier_track}
+\centering
+\includegraphics[width=.65\textwidth]{bezier_track}
 \caption{A racing line approximated with a Bézier curve}
 \label{fig:bezier}
 \end{figure}
@@ -240,8 +239,10 @@ Algorithms and methods described in section \ref{sec:related_work} can be used i
 
 \subsubsection{Mathematical Comparison of two paths}
 To gain additional and more detailed information about the driven racing line, it is helpful to get mathematical values for specific areas (e.g. the entry and exit angle of curves). This can tell a driver that their line was too shallow or too wide and provide the potential to improve.
-For this technique we can use either racing line detection algorithm, even GPS. Every pair of consecutive points is turned into a vector, consisting of the distance between the points and the angle $\theta$ to the x-axis (the equator in case of GPS).
+For this technique we can use any racing line detection algorithm, even GPS. 
+Every pair of consecutive points is turned into a vector, consisting of the distance between the points and the angle $\theta$ to the x-axis (the equator in case of GPS).
 
+\begin{equation}
 \begin{minipage}{\textwidth}
 \begin{center}
 $\Delta x = endPoint.x - startPoint.x$
@@ -253,6 +254,10 @@ $\overline{xy} = \sqrt{\Delta x² * \Delta y²}$
 $\theta = \arctan(\frac{\Delta x}{\Delta y})$ 
 \end{center}
 \end{minipage}
+\label{eq:vector_calc}
+\end{equation}
+
+The vector calculation is described in \ref{eq:vector_calc}. $\overline{xy}$ is the length of the vector and $\theta$ is the angle.
 
 To speed up subsequent calculations all consecutive vectors with the same $\theta$ can be combined into one vector by generating a new vector with the sum of the magnitude of the old ones. This indicates a straight where the individual sections are not that interesting.
 Now the angle of each section of a corner can be compared. Again, the coloring-approach may be used as a simple way to determine the angle at a glance.

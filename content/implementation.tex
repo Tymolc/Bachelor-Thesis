@@ -21,8 +21,8 @@ The functions that are most important to us are the \texttt{SensorDataCollector}
 	\caption{Component Diagram}
 	\label{fig:component_diagram}
 \end{figure}
-
-The communication to our sensors and the server is depicted in the component diagram (figure \ref{fig:component_diagram}). All the sensor data is received via the cars CAN Bus and transfered to the OBD II dongle via the OBD II interface. The dongle sets up a bluetooth connection to our Jetson processing unit, where the data is grabbed by our \texttt{SensorDataCollector}. Also the GPS Dongle sends its data to that component via a USB connection.\\
+\clearpage
+The communication to our sensors and the server is depicted in the component diagram (figure \ref{fig:component_diagram}). All the sensor data is received via the cars CAN Bus and transfered to the OBD II dongle via the OBD II interface. The dongle sets up a Bluetooth connection to our Jetson processing unit, where the data is grabbed by our \texttt{SensorDataCollector}. Also the GPS Dongle sends its data to that component via a USB connection.\\
 Our \texttt{CameraHelper} receives the video data transmitted by the stereo camera via USB and distributes them to the video analysis modules.\\
 Lastly, our \texttt{Helper} class collects all the data we extracted and sends them to the web server.
 
@@ -30,10 +30,11 @@ Lastly, our \texttt{Helper} class collects all the data we extracted and sends t
 We implemented some of the algorithms described in Section \ref{sec:algorithm} in OpenCV and C++, with special focus on the extraction of the racing line from the camera image and the sensor data collection.
 
 \subsubsection{Visual Odometry}
-To extract the Visual Odometry data from the video stream, we used a library called libviso2\footnote{\url{http://www.cvlibs.net/software/libviso/}}, which was developed at the Karlsruhe Institute of Technology (KIT). The library needs a left and right hand rectified image from a stereo camera. The ZED camera from Stereolabs we used already rectifies the images, so we only need to convert the received stereo image into two data buffers.
+To extract the Visual Odometry data from the video stream, we used a library called libviso2\footnote{\url{http://www.cvlibs.net/software/libviso/}}, which was developed at the Karlsruhe Institute of Technology (KIT). The library needs a left and right hand rectified image from a stereo camera. The ZED camera from Stereolabs we used already, rectifies the images, so we only need to convert the received stereo image into two data buffers.
 For that the left and right image is stored in one OpenCV Mat each, converted into grayscale and then transformed into a uchar buffer.
 To receive the images from the camera, we created a \texttt{CameraHelper} class, which centrally grabs the frames and distributes them to the different modules, like the \texttt{RacingLineDetector}, \texttt{FlagDetector}, etc.
-Now that the prerequisites are met, we can feed the images to our library.
+\clearpage
+Now that the prerequisites are met, we can pass the images to our library.
 After analyzing the input as described in section \ref{subsec:vo}, the output will be a 4x4-matrix, the so called pose.
 
 \begin{table}[!ht]
@@ -65,24 +66,28 @@ while(!finished){
 }
 \end{lstlisting}
 
-For our purposes the rotation matrix is not that important, because the racing line is only a series of dots. The rotation of the car doesn't influence the result, so all we need is to extract the translation vector, store it in a vector object and write it into a list. This object contains the summation of all translation vectors, making up the position relative to the starting point.
-At this point it is simply a matter of connecting consecutive dots in the list and drawing the resulting lines. The result will be the recorded racing line.\\
-This racing line can be used on its own, or combined with GPS, as discussed in the Bachelors Thesis "Precise Racing Car Localisation - Improving GPS through Video and Sensors" \cite{hoffmann16}.
+For our purposes the rotation matrix is not that important, because the racing line is only a series of dots. The rotation of the car doesn't influence the result, so it is necessary to extract the translation vector, store it in a vector object and write it into a list. This object contains the summation of all translation vectors, making up the position relative to the starting point.
+At this point we need to connect consecutive dots in the list and draw the resulting lines. The result is the recorded racing line.
+\clearpage
+This racing line can be used on its own, or combined with GPS, as discussed in the Bachelors Thesis "Precise Racing Car Localisation - Improving GPS through Video and Sensors" by Niklas Hoffmann \cite{hoffmann16}.
 
 \subsubsection{Sensordata}
-The OBD-II dongle uses a bluetooth connection to communicate with our analysis software. Via this connection, which is created automatically at startup by the operating system of our processing unit, we can open a serial port to write and read data from.
+The OBD-II dongle uses a Bluetooth connection to communicate with our analysis software. Via this connection, which is created automatically at startup by the operating system of our processing unit, we can open a serial port to write and read data from.
 
 Once the connection is established, the serial connection has to be prepared for the specific settings of the dongle.
 A couple of control commands put it into the state that we can work with: 
 
 \begin{lstlisting}
 void SensorDataCollector::initialize(int fd) {
+	//fd is the fileDescriptor, in this case it is the OBD II dongle
 	waitForAnswer(fd, "ATZ");	//reset device
 	waitForAnswer(fd, "ATL1");	//enable linefeed
 	waitForAnswer(fd, "ATSP0");	//autodetect protocol
 }
 \end{lstlisting}
+
 The function \textit{waitForAnswer} writes the request to the dongle and returns the answer to an optional buffer. For the initialization this buffer is irrelevant, but as soon as we want to receive data, it is necessary.
+\clearpage
 \begin{lstlisting}
 void SensorDataCollector::
 	waitForAnswer(int fd, char *buf, string request) {
@@ -103,13 +108,15 @@ void SensorDataCollector::
 }
 \end{lstlisting}
 
-Now, after determining which PIDs are supported by the car (using PID 0100), we constantly loop through all of them and calculate the corresponding value. Together with the description, this value is then sent to our server as a JSON\footnote{JavaScript Object Notation} object.
+After determining which PIDs are supported by the car (using PID 0100), we constantly loop through all of them and calculate the corresponding value. Together with the description, this value is then sent to our server as a JSON\footnote{JavaScript Object Notation} object.
 
 \subsection{Comparison}
 We compared our racing lines using a Google Maps integration in our JavaScript web page. This section describes how the prerequisites mentioned in Section \ref{sec:context} are calculated and implemented.
 
 \subsubsection{Google Maps}
-In order to properly identify important parts of the track, we decided to connect our recorded racing line with Google Maps. As our recording approaches can not extract any geographic information, we need at least two GPS points as a reference. One GPS point isn't enough, because that wouldn't specify the direction the car traveled. As the points returned by VO are in meters, we can calculate the corresponding geo-coordinates in relation to that reference point. 
+In order to properly identify important parts of the track, we decided to connect our recorded racing line with Google Maps.
+\clearpage
+As our recording approaches can not extract any geographic information, we need at least two GPS points as a reference. One GPS point isn't enough, because that wouldn't specify the direction the car traveled. As the unit of the points returned by VO is meters, we can calculate the corresponding geo-coordinates in relation to that reference point. 
 
 For that we need the starting latitude $\phi_1$, the starting longitude $\lambda_1$, the bearing $\theta$, which is the angle between two VO-points plus the displacement bearing set by the two reference GPS-coordinates, and the distance $\delta$ traveled, which is the distance between the two VO-points.
 
@@ -136,7 +143,7 @@ for (var k = 1; k < voData.length; k++) {
 	calculatedGMapsPoints.push(new google.maps.LatLng(lat2, lng2));
 }
 \end{lstlisting}
-
-In order to depict the sensor data, we color in every line segment according to a two-color gradient. Because of that, we get a lot of line objects, which make further processing difficult. Our solution was to use an additional hidden polyline, that contains all the line segments. This polyline is wider than the normal lines, to make hovering on it easier and the fact, that it is one single object, improves performance and enables us to easily calculate the length of the racing line as well.
+\clearpage
+In order to depict the sensor data, we color in every line segment according to a two-color gradient. Because of that, we get a lot of line objects, which make further processing difficult. Our solution was to use an additional hidden polyline, that contains all the line segments. This polyline is wider than the normal lines, to make hovering on it easier and the fact, that it is one single object, improves performance and enables us to calculate the length of the racing line as well.
 
 \clearpage
